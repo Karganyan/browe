@@ -3,9 +3,17 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const coffeeRouter = require('./routes/coffee');
+const eventsRouter = require('./routes/events');
+const bakeryRouter = require('./routes/bakery');
+const authRouter = require('./routes/auth');
+const privateRouter = require('./routes/private');
+const adminRouter = require('./routes/admin');
 
 const app = express();
 
@@ -18,9 +26,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  // store: new MongoStore({ mongooseConnection: mongoose.connection }), // ! прикрепить базу
+  secret: 'ar2432te3562rbaertv',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false },
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/coffee', coffeeRouter);
+app.use('/events', eventsRouter);
+app.use('/bakery', bakeryRouter);
+app.use('/auth', authRouter);
+app.use('/private', privateRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

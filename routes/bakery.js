@@ -2,8 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
+// страница с меню пекарни
+// ! добавить базу
 router.get('/', (req, res) => {
-  res.send('respond with a resource');
+  res.render('MVP/bakery');
 });
 
 module.exports = router;
