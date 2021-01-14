@@ -5,7 +5,7 @@ const router = express.Router();
 // страница с мероприятиями
 // ! добавить базу
 router.get('/', (req, res) => {
-  res.render('MVP/events');
+  res.render('events');
 });
 
 // записаться

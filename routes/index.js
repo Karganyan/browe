@@ -9,12 +9,12 @@ router.get('/', (req, res) => {
 
 // страница "о нас"
 router.get('/about', (req, res) => {
-  res.render('MVP/about');
+  res.render('about');
 });
 
 // страница "контакты"
 router.get('/contacts', (req, res) => {
-  res.render('MVP/contacts');
+  res.render('contacts');
 });
 
 module.exports = router;

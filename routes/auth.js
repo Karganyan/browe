@@ -45,21 +45,22 @@ router.get('/signin', (req, res) => {
     return failAuth(res);
   }
   return res.end();
-});
- */
+}); */
 
 // регистрация
 router.get('/signup', (req, res) => {
-  res.render('MVP/signup', { isSignup: true }); // isSignup - включает скрипт public/signup.js
+  res.render('MVP/signup', { isSignup: true, layout: false }); // isSignup - включает скрипт public/signup.js
 });
 
 // регистрация
 // ! добавить mongoose.model
-/* router.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res) => {
   const { username, password, email } = req.body;
   try {
     // Мы не храним пароль в БД, только его хэш
     const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
+    console.log('saltRounds', saltRounds);
+    console.log('password', password);
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const user = await User.create({
       username,
@@ -73,7 +74,7 @@ router.get('/signup', (req, res) => {
   }
   return res.end();
 });
- */
+
 // Выход
 router.get('/signout', (req, res, next) => {
   req.session.destroy((err) => {

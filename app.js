@@ -1,10 +1,14 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const userMiddleware = require('./middlewares/user.js');
+// const mongoose = require('mongoose');
+// const MongoStore = require('connect-mongo')(session);
+// mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -20,6 +24,8 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+// Доверять первому прокси (для Heroku и прочих)
+app.set('trust proxy', 1);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,11 +34,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   // store: new MongoStore({ mongooseConnection: mongoose.connection }), // ! прикрепить базу
-  secret: 'ar2432te3562rbaertv',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false },
 }));
+app.use(userMiddleware);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
