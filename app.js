@@ -10,12 +10,6 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const userMiddleware = require('./middlewares/user.js');
 
-<<<<<<< HEAD
-mongoose.connect(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-=======
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 require('./passport-setup');
 
@@ -33,7 +27,6 @@ require('./passport-setup');
 
 
 
->>>>>>> d0a141f5caecf3cca2d9f4c0f048b2b612f1a2b6
 
 const indexRouter = require('./routes/index');
 
