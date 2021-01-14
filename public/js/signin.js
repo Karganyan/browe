@@ -1,4 +1,3 @@
-// ! username исправить на email
 /**
  * Выдает ошибку при неверной аутентификации
  * @param {HTMLFormElement} signinForm Форма входа
@@ -29,7 +28,7 @@ document.forms.signinForm?.addEventListener('submit', async (event) => {
   if (response.status !== 200) {
     return failSignin(event.target);
   }
-  return window.location.assign('/private');
+  return window.location.assign('/coffee');
 });
 
 // Очищаем кастомные сообщения об ошибках при новом вводе

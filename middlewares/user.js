@@ -1,4 +1,4 @@
 module.exports = (req, res, next) => {
-  res.locals.username = req.session.user?.username;
+  res.locals.user = req.session?.user;
   next();
 };

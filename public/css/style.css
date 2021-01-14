@@ -23,7 +23,6 @@ body {
   text-align: center;
 }
 .logo-text {
-  background: url(https://www.shantifood.ru/wp-content/uploads/2017/06/Coffee-4.jpg) no-repeat center center;
   background-size: 100%;
   justify-content: center;
   align-items: center;
@@ -57,7 +56,7 @@ body {
 h1#neon-tubing {
 	text-align: center;
 	font-family: Neon80sRegular, sans-serif;
-	font-size: 70px;
+	font-size: 40px;
 	letter-spacing: 1rem;
 	background-size: cover;
   color: #ff4081 pink accent-2

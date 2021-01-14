@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const User = require('../models/user');
 
 const logger = console;
 const router = express.Router();
@@ -13,7 +14,7 @@ function failAuth(res) {
 function serializeUser(user) {
   return {
     id: user.id,
-    username: user.username, // ! username в зависимости от базы
+    login: user.login, // ! username в зависимости от базы
   };
 }
 
@@ -24,13 +25,14 @@ router.get('/signin', (req, res) => {
 
 // авторизация
 // ! добавить mongoose.model
-/* router.post('/signin', async (req, res) => {
-  const { username, password } = req.body;
+router.post('/signin', async (req, res) => {
+  const {
+    login,
+    password,
+  } = req.body;
   try {
     // Пытаемся сначала найти пользователя в БД
-    const user = await User.findOne({
-      username,
-    }).exec();
+    const user = await User.findOne({ login });
     if (!user) {
       return failAuth(res);
     }
@@ -45,35 +47,41 @@ router.get('/signin', (req, res) => {
     return failAuth(res);
   }
   return res.end();
-}); */
-
-// регистрация
-router.get('/signup', (req, res) => {
-  res.render('MVP/signup', { isSignup: true, layout: false }); // isSignup - включает скрипт public/signup.js
 });
 
 // регистрация
-// ! добавить mongoose.model
-// router.post('/signup', async (req, res) => {
-//   const { username, password, email } = req.body;
-//   try {
-//     // Мы не храним пароль в БД, только его хэш
-//     const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
-//     console.log('saltRounds', saltRounds);
-//     console.log('password', password);
-//     const hashedPassword = await bcrypt.hash(password, saltRounds);
-//     const user = await User.create({
-//       username,
-//       password: hashedPassword,
-//       email,
-//     });
-//     req.session.user = serializeUser(user);
-//   } catch (err) {
-//     logger.error(err);
-//     return failAuth(res);
-//   }
-//   return res.end();
-// });
+router.get('/signup', (req, res) => {
+  res.render('MVP/signup', { isSignup: true }); // isSignup - включает скрипт public/signup.js
+});
+
+// регистрация
+router.post('/signup', async (req, res) => {
+  const {
+    name,
+    login,
+    password,
+    email,
+    phoneNumber,
+  } = req.body;
+  try {
+    // Мы не храним пароль в БД, только его хэш
+    const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const user = await User.create({
+      login,
+      name,
+      password: hashedPassword,
+      email,
+      phoneNumber,
+    });
+    console.log(user);
+    req.session.user = serializeUser(user);
+  } catch (err) {
+    logger.error(err);
+    return failAuth(res);
+  }
+  return res.end();
+});
 
 // Выход
 router.get('/signout', (req, res, next) => {
