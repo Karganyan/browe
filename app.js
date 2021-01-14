@@ -10,10 +10,30 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const userMiddleware = require('./middlewares/user.js');
 
+<<<<<<< HEAD
 mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+=======
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+require('./passport-setup');
+
+const cookieSession = require('cookie-session')
+const bodyParser = require('body-parser')
+
+// Авторизация Passport
+const passport = require('passport')
+const cors = require('cors')
+
+// const InstagramPassport = require('passport-instagram').Strategy   Больше не работает
+// const TelegramPassport = require('passport-telegram').Strategy     Не работает без протокола https
+const GoogleStrategy = require('passport-google-oauth2').Strategy
+require('./passport-setup');
+
+
+
+>>>>>>> d0a141f5caecf3cca2d9f4c0f048b2b612f1a2b6
 
 const indexRouter = require('./routes/index');
 
@@ -27,12 +47,21 @@ const adminRouter = require('./routes/admin');
 
 const app = express();
 
+app.use(cookieSession({
+  name: 'tim-session',
+  keys: ['key1', 'key2']
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 // Доверять первому прокси (для Heroku и прочих)
 app.set('trust proxy', 1);
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -53,6 +82,9 @@ app.use(session({
 }));
 app.use(userMiddleware);
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -63,7 +95,7 @@ app.use('/auth', authRouter);
 app.use('/private', privateRouter);
 app.use('/admin', adminRouter);
 
-// catch 404 and forward to error handler
+// // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
 });

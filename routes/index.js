@@ -17,4 +17,8 @@ router.get('/contacts', (req, res) => {
   res.render('contacts');
 });
 
+router.get('/uspex', (req,res) => {
+  res.render('uspex')
+})
+
 module.exports = router;
