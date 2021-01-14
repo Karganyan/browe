@@ -1,9 +1,8 @@
-
-<form action="/">
+<form action="/auth/signup" method="POST" name="signupForm">
   <div class="field">
     <label class="label">Name</label>
     <div class="control has-icons-left has-icons-right">
-      <input class="input is-success" type="text" placeholder="Введите имя" required>
+      <input class="input is-success" type="text" placeholder="Введите имя" name="name" required>
       <span class="icon is-small is-left">
         <i class="fas fa-user"></i>
       </span>
@@ -16,7 +15,7 @@
   <div class="field">
     <label class="label">Login</label>
     <div class="control has-icons-left has-icons-right">
-      <input class="input is-success" type="text" placeholder="Введите логин" required>
+      <input class="input is-success" type="text" placeholder="Введите логин" name="login" required>
       <span class="icon is-small is-left">
         <i class="fas fa-user"></i>
       </span>
@@ -29,7 +28,7 @@
   <div class="field">
     <label class="label">Email</label>
     <div class="control has-icons-left has-icons-right">
-      <input class="input is-danger" type="email" placeholder="Введите почту" required>
+      <input class="input is-danger" type="email" placeholder="Введите почту" name="email" required>
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>
@@ -42,7 +41,7 @@
   <div class="field">
     <label class="label">Password</label>
     <div class="control has-icons-left has-icons-right">
-      <input class="input is-danger" type="password" placeholder="Введите пароль" required>
+      <input class="input is-danger" type="password" placeholder="Введите пароль" name="password" required>
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>

@@ -5,7 +5,6 @@ const User = require('../models/user');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-
 const logger = console;
 const router = express.Router();
 
@@ -18,7 +17,7 @@ function failAuth(res) {
 function serializeUser(user) {
   return {
     id: user.id,
-    login: user.login, // ! username в зависимости от базы
+    login: user.login,
   };
 }
 
@@ -53,7 +52,6 @@ router.post('/signin', async (req, res) => {
   return res.end();
 });
 
-
 // регистрация
 router.get('/signup', (req, res) => {
   res.render('signup', { isSignup: true }); // isSignup - включает скрипт public/signup.js
@@ -68,6 +66,11 @@ router.post('/signup', async (req, res) => {
     email,
     phoneNumber,
   } = req.body;
+  console.log('----------->', name,
+    login,
+    password,
+    email,
+    phoneNumber);
   try {
     // Мы не храним пароль в БД, только его хэш
     const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);

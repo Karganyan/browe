@@ -1,7 +1,3 @@
-/**
- * Выдает ошибку при неверной аутентификации
- * @param {HTMLFormElement} signinForm Форма входа
- */
 function failSignin(signinForm) {
   signinForm.username.setCustomValidity('Неверные имя пользователя и/или пароль.');
   signinForm.username.reportValidity();

@@ -1,17 +1,19 @@
-/**
- * Выдает ошибку при неверной регистрации
- * @param {HTMLFormElement} signupForm Форма регистрации
- */
 function failSignup(signupForm) {
-  signupForm.username.setCustomValidity('Вероятно, что вы уже зарегистрированы.');
-  signupForm.username.reportValidity();
+  signupForm.login.setCustomValidity('Вероятно, что вы уже зарегистрированы.');
+  signupForm.login.reportValidity();
 }
 
 document.forms.signupForm?.addEventListener('submit', async (event) => {
-  event.preventDefault();
   const { method, action } = event.target;
   let response;
   try {
+    event.preventDefault();
+    console.log(event.target.name.value,
+      event.target.login.value,
+      event.target.phoneNumber.value,
+      event.target.email.value,
+      event.target.password.value,
+    );
     response = await fetch(action, {
       method,
       headers: {
@@ -24,7 +26,6 @@ document.forms.signupForm?.addEventListener('submit', async (event) => {
         email: event.target.email.value,
         password: event.target.password.value,
       }),
-      console.log('ku');
     });
   } catch (err) {
     return failSignup(event.target);
@@ -36,13 +37,15 @@ document.forms.signupForm?.addEventListener('submit', async (event) => {
 });
 
 // Очищаем кастомные сообщения об ошибках при новом вводе
-if (document.forms.signupForm) {
-  [
-    document.forms.signupForm.username,
-    document.forms.signupForm.email,
-    document.forms.signupForm.password,
-  ].forEach((input) => input.addEventListener('input', (event) => {
-    event.target.setCustomValidity('');
-    event.target.checkValidity();
-  }));
-}
+// if (document.forms.signupForm) {
+//   [
+//     document.forms.signupForm.login,
+//     document.forms.signupForm.name,
+//     document.forms.signupForm.phoneNumber,
+//     document.forms.signupForm.email,
+//     document.forms.signupForm.password,
+//   ].forEach((input) => input.addEventListener('input', (event) => {
+//     event.target.setCustomValidity('');
+//     event.target.checkValidity();
+//   }));
+// }
