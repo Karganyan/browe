@@ -11,6 +11,7 @@ const userMiddleware = require('./middlewares/user.js');
 // mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const indexRouter = require('./routes/index');
+const hbs = require('hbs');
 const usersRouter = require('./routes/users');
 const coffeeRouter = require('./routes/coffee');
 const eventsRouter = require('./routes/events');
@@ -19,8 +20,8 @@ const authRouter = require('./routes/auth');
 const privateRouter = require('./routes/private');
 const adminRouter = require('./routes/admin');
 
-const app = express();
-
+const app = express();                        
+                                         
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -41,7 +42,8 @@ app.use(session({
 }));
 app.use(userMiddleware);
 
-app.use('/', indexRouter);
+hbs.registerPartials(path.join(__dirname, '/views/partials'));
+app.use('/', coffeRouter);
 app.use('/users', usersRouter);
 app.use('/coffee', coffeeRouter);
 app.use('/events', eventsRouter);
