@@ -8,32 +8,25 @@ const logger = require('morgan');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth2').Strategy
+require('./passport-setup');
 const userMiddleware = require('./middlewares/user.js');
 
-<<<<<<< HEAD
-mongoose.connect(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-=======
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 require('./passport-setup');
 
-const cookieSession = require('cookie-session')
-const bodyParser = require('body-parser')
+const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 
 // Авторизация Passport
-const passport = require('passport')
-const cors = require('cors')
+const cors = require('cors');
 
 // const InstagramPassport = require('passport-instagram').Strategy   Больше не работает
 // const TelegramPassport = require('passport-telegram').Strategy     Не работает без протокола https
-const GoogleStrategy = require('passport-google-oauth2').Strategy
-require('./passport-setup');
 
 
 
->>>>>>> d0a141f5caecf3cca2d9f4c0f048b2b612f1a2b6
 
 const indexRouter = require('./routes/index');
 
