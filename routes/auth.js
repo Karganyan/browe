@@ -118,13 +118,39 @@ const isLoggedIn = (req, res, next) => {
 };
 
 router.get('/failed', (req, res) => {
-  res.send('You Failed to log in!');
-});
-router.get('/good', isLoggedIn, (req, res) => {
-  res.render('coffee', { name: req.user.displayName });
-});
+  res.send('You Failed to log in!')
+})
+router.get('/good', isLoggedIn, async (req, res) => {
+  const name = req.user.displayName
+  const email = req.user.emails[0].value
+  const user = await User.findOne({ email })
+  console.log('DO IFA', user);
+  if (!user) {
+    function generateRandom() {
+      let alphabet = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
+      let random = '';
+      for (let i = 0; i < 9; i++) {
+        random += alphabet[Math.round(Math.random() * (alphabet.length - 1))];
+      }
+      return random
+    }
+    const login = name;
+    const password = generateRandom()
+
+    const newUser = await new User({ name, login, password, email })
+    newUser.save()
+    console.log('DO USERA', user);
+    req.session.user = serializeUser(user);
+    res.redirect('/');
+  } else {
+    req.session.user = serializeUser(user);
+    res.redirect('/');
+  }
+})
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+
+
   function (req, res) {
     res.redirect('/auth/good');
   });
@@ -133,6 +159,7 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
 router.get('/signout', (req, res, next) => {
   console.log('------->', req.session.user);
   req.session = null;
+  res.clearCookie();
   res.redirect('/');
 });
 
