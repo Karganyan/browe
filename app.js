@@ -7,9 +7,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const userMiddleware = require('./middlewares/user.js');
-// const mongoose = require('mongoose');
-// const MongoStore = require('connect-mongo')(session);
-// mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const indexRouter = require('./routes/index');
 
