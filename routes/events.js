@@ -1,5 +1,7 @@
 const express = require('express');
 const Event = require('../models/event');
+const User = require('../models/user');
+
 const auth = require('../middlewares/auth');
 
 const router = express.Router();
@@ -17,7 +19,12 @@ router.get('/', async (req, res) => {
 
 // записаться
 // ! написать fetch и переделать на patch // должна меняться на отписаться
-router.post('/signup/:id', auth, (req, res) => {
+router.post('/signup', auth, async (req, res) => {
+  const { userid, eventid } = req.body;
+  const event = await Event.findById(eventid);
+  const user = await User.findById(userid);
+  user.events.push(event);
+  await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
   res.redirect('/events');
 });
 
