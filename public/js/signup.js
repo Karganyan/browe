@@ -1,4 +1,3 @@
-// ! username исправить на email
 /**
  * Выдает ошибку при неверной регистрации
  * @param {HTMLFormElement} signupForm Форма регистрации
@@ -7,8 +6,8 @@ function failSignup(signupForm) {
   signupForm.username.setCustomValidity('Вероятно, что вы уже зарегистрированы.');
   signupForm.username.reportValidity();
 }
-const form = document.getElementById('signupForm');
-form?.addEventListener('submit', async (event) => {
+
+document.forms.signupForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
   const { method, action } = event.target;
   let response;
@@ -19,10 +18,13 @@ form?.addEventListener('submit', async (event) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: event.target.username.value,
+        name: event.target.name.value,
+        login: event.target.login.value,
+        phoneNumber: event.target.phoneNumber.value,
         email: event.target.email.value,
         password: event.target.password.value,
       }),
+      console.log('ku');
     });
   } catch (err) {
     return failSignup(event.target);
@@ -30,7 +32,7 @@ form?.addEventListener('submit', async (event) => {
   if (response.status !== 200) {
     return failSignup(event.target);
   }
-  return window.location.assign('/private');
+  return window.location.assign('/coffee');
 });
 
 // Очищаем кастомные сообщения об ошибках при новом вводе

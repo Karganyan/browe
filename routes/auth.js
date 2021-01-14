@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const User = require('../models/user');
 
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -17,7 +18,7 @@ function failAuth(res) {
 function serializeUser(user) {
   return {
     id: user.id,
-    username: user.username, // ! username в зависимости от базы
+    login: user.login, // ! username в зависимости от базы
   };
 }
 
@@ -28,13 +29,14 @@ router.get('/signin', (req, res) => {
 
 // авторизация
 // ! добавить mongoose.model
-/* router.post('/signin', async (req, res) => {
-  const { username, password } = req.body;
+router.post('/signin', async (req, res) => {
+  const {
+    login,
+    password,
+  } = req.body;
   try {
     // Пытаемся сначала найти пользователя в БД
-    const user = await User.findOne({
-      username,
-    }).exec();
+    const user = await User.findOne({ login });
     if (!user) {
       return failAuth(res);
     }
@@ -49,7 +51,7 @@ router.get('/signin', (req, res) => {
     return failAuth(res);
   }
   return res.end();
-}); */
+});
 
 
 // регистрация
@@ -58,47 +60,52 @@ router.get('/signup', (req, res) => {
 });
 
 // регистрация
-// ! добавить mongoose.model
-// router.post('/signup', async (req, res) => {
-//   const { username, password, email } = req.body;
-//   try {
-//     // Мы не храним пароль в БД, только его хэш
-//     const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
-//     console.log('saltRounds', saltRounds);
-//     console.log('password', password);
-//     const hashedPassword = await bcrypt.hash(password, saltRounds);
-//     const user = await User.create({
-//       username,
-//       password: hashedPassword,
-//       email,
-//     });
-//     req.session.user = serializeUser(user);
-//   } catch (err) {
-//     logger.error(err);
-//     return failAuth(res);
-//   }
-//   return res.end();
-// });
+router.post('/signup', async (req, res) => {
+  const {
+    name,
+    login,
+    password,
+    email,
+    phoneNumber,
+  } = req.body;
+  try {
+    // Мы не храним пароль в БД, только его хэш
+    const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const user = await User.create({
+      login,
+      name,
+      password: hashedPassword,
+      email,
+      phoneNumber,
+    });
+    console.log(user);
+    req.session.user = serializeUser(user);
+  } catch (err) {
+    logger.error(err);
+    return failAuth(res);
+  }
+  return res.end();
+});
 
 // Авторизация через Гугл
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
 passport.use(new GoogleStrategy({
-    clientID: '809063709537-lmecqj5l72ktd9h6jta4llgho5n2h878.apps.googleusercontent.com',
-    clientSecret: 'VLqMRvXWmqtHZs3tMIh9ASN0',
-    callbackURL: "http://localhost:3000/auth/google/callback",
-  },
-  function(accessToken, refreshToken, profile, done) {
+  clientID: '809063709537-lmecqj5l72ktd9h6jta4llgho5n2h878.apps.googleusercontent.com',
+  clientSecret: 'VLqMRvXWmqtHZs3tMIh9ASN0',
+  callbackURL: "http://localhost:3000/auth/google/callback",
+},
+  function (accessToken, refreshToken, profile, done) {
     return done(null, profile);
   }
 ));
-
 
 const isLoggedIn = (req, res, next) => {
   if (req.user) {
@@ -106,22 +113,19 @@ const isLoggedIn = (req, res, next) => {
   } else {
     res.sendStatus(401);
   }
-}
+};
 
 router.get('/failed', (req, res) => {
-  res.send('You Failed to log in!')
-})
+  res.send('You Failed to log in!');
+});
 router.get('/good', isLoggedIn, (req, res) => {
-  res.render('coffee', { name: req.user.displayName })
-
-})
+  res.render('coffee', { name: req.user.displayName });
+});
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
-  function(req, res) {
+  function (req, res) {
     res.redirect('/auth/good');
-  }
-);
-
+  });
 
 // Выход
 router.get('/signout', (req, res, next) => {
