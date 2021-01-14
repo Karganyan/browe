@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use(cookieSession({
-  name: 'tim-session',
+  name: 'browe',
   keys: ['key1', 'key2']
 }))
 app.set('views', 'views')
@@ -123,3 +123,8 @@ app.listen(3000, () => console.log(`Example app listening on port ${3000}!`))
 //     // Successful authentication, redirect home.
 //     res.redirect('/');
 // });
+
+
+
+
+https://console.developers.google.com/apis/credentials/oauthclient/$809063709537-lmecqj5l72ktd9h6jta4llgho5n2h878.apps.googleusercontent.com?project=$VLqMRvXWmqtHZs3tMIh9ASN0

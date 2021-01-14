@@ -1,8 +1,96 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: #00B7FF;
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  
 }
+
+.container {
+  flex: 1 0 auto;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo {
+  display: table;
+  text-align: center;
+}
+.logo-text {
+  background-size: 100%;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  height: 130px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.page-footer {
+  padding: 0;
+}
+
+.phone {
+  padding-right: 100px;
+}
+
+.page-footer img {
+  width: 45px;
+  height: 45px;
+}
+
+/* НЕОН */
+@font-face {
+	font-family: 'Neon80sRegular';
+	src: url('http://thenewcode.com/assets/fonts/neon-webfont.woff') format('woff'),
+         url('http://thenewcode.com/assets/fonts/neon-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+h1#neon-tubing {
+	text-align: center;
+	font-family: Neon80sRegular, sans-serif;
+	font-size: 40px;
+	letter-spacing: 1rem;
+	background-size: cover;
+  color: #ff4081 pink accent-2
+
+}
+@keyframes neonspark  {
+	0% {
+		text-shadow: none;
+	}
+	30% {
+		text-shadow: 0 0 30px rgba(255,0,84,0.6);
+	}
+	60% {
+		text-shadow: 0 0 30px rgba(255,0,84,0.6),
+		  0 0 60px rgba(255,0,84,0.4);
+	}
+	80% {
+		text-shadow: none;
+	}
+	100% {
+		text-shadow: 0 0 30px rgba(255,0,84,0.6),
+		 0 0 60px rgba(255,0,84,0.4), 
+		 0 0 100px rgba(255,0,84,0.2), 
+		 0 0 90px rgba(255,0,84,0.1);
+	}
+}
+h1#neon-tubing {
+	animation: neonspark 1s 3s forwards;
+	}
+h1#neon-tubing span {
+		animation: neonspark 4s 3s infinite;
+	}
+/* ------------------------------------ */
+
+  h1 {
+    margin: 0;
+  }
