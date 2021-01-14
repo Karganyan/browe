@@ -10,7 +10,6 @@ function failSignup(signupForm) {
 const form = document.getElementById('signupForm');
 form?.addEventListener('submit', async (event) => {
   event.preventDefault();
-  console.log('signup');
   const { method, action } = event.target;
   let response;
   try {

@@ -1,6 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+
 const logger = console;
 const router = express.Router();
 
@@ -19,7 +23,7 @@ function serializeUser(user) {
 
 // авторизация
 router.get('/signin', (req, res) => {
-  res.render('MVP/signin', { isSignin: true }); // isSignin - включает скрипт public/signin.js
+  res.render('signin', { isSignin: true }); // isSignin - включает скрипт public/signin.js
 });
 
 // авторизация
@@ -47,9 +51,10 @@ router.get('/signin', (req, res) => {
   return res.end();
 }); */
 
+
 // регистрация
 router.get('/signup', (req, res) => {
-  res.render('MVP/signup', { isSignup: true, layout: false }); // isSignup - включает скрипт public/signup.js
+  res.render('signup', { isSignup: true }); // isSignup - включает скрипт public/signup.js
 });
 
 // регистрация
@@ -74,6 +79,49 @@ router.get('/signup', (req, res) => {
 //   }
 //   return res.end();
 // });
+
+// Авторизация через Гугл
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.use(new GoogleStrategy({
+    clientID: '809063709537-lmecqj5l72ktd9h6jta4llgho5n2h878.apps.googleusercontent.com',
+    clientSecret: 'VLqMRvXWmqtHZs3tMIh9ASN0',
+    callbackURL: "http://localhost:3000/auth/google/callback",
+  },
+  function(accessToken, refreshToken, profile, done) {
+    return done(null, profile);
+  }
+));
+
+
+const isLoggedIn = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+router.get('/failed', (req, res) => {
+  res.send('You Failed to log in!')
+})
+router.get('/good', isLoggedIn, (req, res) => {
+  res.render('coffee', { name: req.user.displayName })
+
+})
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+  function(req, res) {
+    res.redirect('/auth/good');
+  }
+);
+
 
 // Выход
 router.get('/signout', (req, res, next) => {

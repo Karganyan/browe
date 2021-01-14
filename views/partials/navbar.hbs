@@ -1,6 +1,6 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
+    <a class="navbar-item" href="/">
       <div class="logo">
         <div class="logo-text">
           <h1 id="neon-tubing">BR<span></span>O.WE</h1>
@@ -8,7 +8,6 @@
         </div>
       </div>
     </a>
-
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -37,18 +36,30 @@
       </a>
     </div>
   </div>
-
+{{#if username}}
   <div class="navbar-end">
     <div class="navbar-item">
       <div class="buttons">
-        <a class="button is-primary">
-          <strong>Регистрация</strong>
-        </a>
-        <a class="button is-light">
-          Войти
+        <a href="/auth/signup" class="button is-primary">
+          <strong>Выйти</strong>
         </a>
       </div>
     </div>
   </div>
+{{else}}
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <div class="buttons">
+        <a href="/auth/signup" class="button is-primary">
+          <strong>Регистрация</strong>
+        </a>
+        <a href="/auth/signin" class="button is-light">
+        {{!-- <a class="button is-light" href="/auth/google"> --}}
+          Войти
+        </a>
+        <a href='#'>{{ name }}</a>
+      </div>
+    </div>
   </div>
+  {{/if}}
 </nav>
