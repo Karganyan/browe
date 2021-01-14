@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  // store: new MongoStore({ mongooseConnection: mongoose.connection }), // ! прикрепить базу
+  store: new MongoStore({ mongooseConnection: mongoose.connection }), // ! прикрепить базу
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
