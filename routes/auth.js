@@ -19,7 +19,7 @@ function serializeUser(user) {
 
 // авторизация
 router.get('/signin', (req, res) => {
-  res.render('MVP/signin', { isSignin: true }); // isSignin - включает скрипт public/signin.js
+  res.render('signin', { isSignin: true }); // isSignin - включает скрипт public/signin.js
 });
 
 // авторизация
@@ -49,7 +49,7 @@ router.get('/signin', (req, res) => {
 
 // регистрация
 router.get('/signup', (req, res) => {
-  res.render('MVP/signup', { isSignup: true, layout: false }); // isSignup - включает скрипт public/signup.js
+  res.render('signup', { isSignup: true }); // isSignup - включает скрипт public/signup.js
 });
 
 // регистрация

@@ -3,7 +3,7 @@
 <div class="card">
   <div class="card-image">
     <figure class="image is-4by3">
-      <img src="{{imgURL}}" alt="Placeholder image">
+      <img src={{this.imgURL}} alt="Placeholder image">
     </figure>
   </div>
   <div class="card-content">
@@ -13,12 +13,12 @@
         </figure>
       </div>
       <div class="media-content">
-        <p class="title is-4">{{title}}</p>
+        <p class="title is-4">{{this.title}}</p>
      {{!--    <p class="subtitle is-6">{{price}}</p> --}}
       </div>
     </div>
     <div class="content">
-      {{desctription}}
+      {{this.desctription}}
     </div>
   </div>
 </div>

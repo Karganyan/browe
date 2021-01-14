@@ -1,11 +1,15 @@
 const express = require('express');
+const Bake = require('../models/bake');
 
 const router = express.Router();
 
-// страница с меню пекарни
-// ! добавить базу
-router.get('/', (req, res) => {
-  res.render('bakery');
+router.get('/', async (req, res) => {
+  const bakes = await Bake.find({ visible: true });
+  res.render('bakery', {
+    title: 'BRO.WE.COFFE',
+    isCoffe: true,
+    bakes,
+  });
 });
 
 module.exports = router;

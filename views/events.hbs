@@ -1,6 +1,6 @@
 
 {{#each events}}
-<div class="is-four-fifths">
+<div class="is-four-fifths" >
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
@@ -17,8 +17,8 @@
           <p class="subtitle is-6">{{descriptionDate}}</p>
         </div>
       </div>
+      <button data-eventid={{this._id}} data-userid={{user.id}} id="btnforevent" class="button is-light">Записаться на мероприятие</button>
     </div>
   </div>
-  <button class="primary">Записаться</button>
 </div>
 {{/each}}

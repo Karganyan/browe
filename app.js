@@ -6,10 +6,14 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
-const userMiddleware = require('./middlewares/user.js');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+const userMiddleware = require('./middlewares/user.js');
+
+mongoose.connect(process.env.DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const indexRouter = require('./routes/index');
 
@@ -31,15 +35,21 @@ app.set('trust proxy', 1);
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  // store: new MongoStore({ mongooseConnection: mongoose.connection }), // ! прикрепить базу
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+  }), // ! прикрепить базу
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: false },
+  cookie: {
+    secure: false,
+  },
 }));
 app.use(userMiddleware);
 
@@ -51,22 +61,21 @@ app.use('/events', eventsRouter);
 app.use('/bakery', bakeryRouter);
 app.use('/auth', authRouter);
 app.use('/private', privateRouter);
-app.use('/admin', adminRouter); 
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
 });
-        
-// error handler  
+
+// error handler
 app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-             
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});     
-    
+});
+
 module.exports = app;
