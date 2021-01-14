@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Event = require('../models/event');
 
-mongoose.connect('mongodb+srv://Artem:Artem@cluster0.o3cuc.mongodb.net/BroWe?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('process.env.DB_URL', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const events = [
   {

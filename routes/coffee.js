@@ -1,5 +1,8 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const Coffee = require('../models/cofee');
+
+mongoose.connect('process.env.DB_URL', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const router = express.Router();
 
