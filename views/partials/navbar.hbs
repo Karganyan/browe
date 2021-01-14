@@ -36,17 +36,18 @@
       </a>
     </div>
   </div>
-{{#if username}}
+  {{#if user}}
   <div class="navbar-end">
     <div class="navbar-item">
       <div class="buttons">
+        <a href=''>{{ name }}</a>
         <a href="/auth/signup" class="button is-primary">
           <strong>Выйти</strong>
         </a>
       </div>
     </div>
   </div>
-{{else}}
+  {{else}}
   <div class="navbar-end">
     <div class="navbar-item">
       <div class="buttons">
@@ -54,10 +55,8 @@
           <strong>Регистрация</strong>
         </a>
         <a href="/auth/signin" class="button is-light">
-   {{!--      <a class="button is-light" href="/auth/google"> --}}
           Войти
         </a>
-        <a href='#'>{{ name }}</a>
       </div>
     </div>
   </div>
