@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Coffee = require('../models/cofee');
 
-mongoose.connect('mongodb+srv://Artem:Artem@cluster0.o3cuc.mongodb.net/BroWe?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('process.env.DB_URL', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const coffes = [
   {
