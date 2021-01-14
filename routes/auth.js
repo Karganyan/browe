@@ -111,18 +111,11 @@ const isLoggedIn = (req, res, next) => {
 router.get('/failed', (req, res) => {
   res.send('You Failed to log in!')
 })
-
-// router.get('/good', isLoggedIn, (req, res) => {
-//   console.log(req.user)
-//   res.redirect('/', {name: req.user.displayName})
-
-// })
 router.get('/good', isLoggedIn, (req, res) => {
   res.render('coffee', { name: req.user.displayName })
 
 })
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
     res.redirect('/auth/good');

@@ -1,16 +1,23 @@
 const express = require('express');
+const Event = require('../models/event');
+const auth = require('../middlewares/auth');
 
 const router = express.Router();
 
 // страница с мероприятиями
 // ! добавить базу
-router.get('/', (req, res) => {
-  res.render('events');
+router.get('/', async (req, res) => {
+  const events = await Event.find({ visible: true });
+  res.render('events', {
+    title: 'BRO.WE.COFFE',
+    isCoffe: true,
+    events,
+  });
 });
 
 // записаться
 // ! написать fetch и переделать на patch // должна меняться на отписаться
-router.post('/signup/:id', (req, res) => {
+router.post('/signup/:id', auth, (req, res) => {
   res.redirect('/events');
 });
 
