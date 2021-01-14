@@ -1,11 +1,17 @@
 const express = require('express');
+const Event = require('../models/event');
 
 const router = express.Router();
 
 // страница с мероприятиями
 // ! добавить базу
-router.get('/', (req, res) => {
-  res.render('events');
+router.get('/', async (req, res) => {
+  const events = await Event.find({ visible: true })
+  res.render('events', {
+    title: 'BRO.WE.COFFE',
+    isCoffe: true,
+    events,
+  });
 });
 
 // записаться
