@@ -16,7 +16,7 @@ function failAuth(res) {
 // Подготавливает пользователя для записи в сессию
 function serializeUser(user) {
   return {
-    id: user.id,
+    id: user?.id,
     login: user.login,
   };
 }
@@ -140,7 +140,7 @@ router.get('/good', isLoggedIn, async (req, res) => {
     const newUser = await new User({ name, login, password, email })
     newUser.save()
     console.log('DO USERA', user);
-    req.session.user = serializeUser(user);
+    req.session.user = serializeUser(newUser);
     res.redirect('/');
   } else {
     req.session.user = serializeUser(user);

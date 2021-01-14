@@ -84,6 +84,9 @@ h1#neon-tubing span {
     margin-bottom: 10px;
   }
 
+.press-event-button {
+  content: 'Вы записаны!';
+}
 .navbar-item a{
   padding: 5px 10px 5px 10px
 }

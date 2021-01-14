@@ -8,22 +8,22 @@ const logger = require('morgan');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth2').Strategy;
-require('./passport-setup');
-const userMiddleware = require('./middlewares/user.js');
 
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Artem:Artem@cluster0.o3cuc.mongodb.net/BroWe?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 require('./passport-setup');
 
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 
 // Авторизация Passport
+const passport = require('passport');
 const cors = require('cors');
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
+const userMiddleware = require('./middlewares/user.js');
 
 // const InstagramPassport = require('passport-instagram').Strategy   Больше не работает
 // const TelegramPassport = require('passport-telegram').Strategy     Не работает без протокола https
+require('./passport-setup');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');

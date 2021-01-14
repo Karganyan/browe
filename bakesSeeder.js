@@ -1,7 +1,10 @@
-const mongoose = require('mongoose');
-const Bake = require('../models/bake');
+require('dotenv').config();
 
-mongoose.connect('process.env.DB_URL', { useNewUrlParser: true, useUnifiedTopology: true });
+console.log(process.env.DB_URL);
+const mongoose = require('mongoose');
+const Bake = require('./models/bake');
+
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const bakes = [
   {
@@ -12,25 +15,25 @@ const bakes = [
   {
     title: 'Киш',
     desctription: 'Киш со шпинатом и сулугуни (вес 1200 гр, диаметр 25 см)',
-    imgURL: 'https://drive.google.com/file/d/1i70sZwxPZ0YUtZXZYYaAWii6cAkdiuBC/view?usp=sharing',
+    imgURL: 'https://i.ibb.co/1GXZ03q/photo5345994885263635053.jpg',
   },
   {
     title: 'Киш',
     desctription: 'Киш луковый (вес 1200 гр, диаметр 25 см)',
-    imgURL: 'https://drive.google.com/file/d/16CoEEw4lBSOOSfBCj9mgj5fD27Lr3b7y/view?usp=sharing',
+    imgURL: 'https://i.ibb.co/m9vxxPy/8fb37bce-55d7-4728-8fae-caa56312513e.jpg',
   },
   {
     title: 'Киш',
     desctription: 'Киш с курицей карри (вес 1200 гр, диаметр 25 см)',
-    imgURL: 'https://drive.google.com/file/d/1L-5C434b54W-VFnaJM2c_X-Sw0Z8DyvY/view?usp=sharing',
+    imgURL: 'https://i.ibb.co/bd2Dpw0/7dcc8297-ad93-4d75-a33a-44f7b7737e29.jpg',
   },
   {
     title: 'Киш',
     desctription: 'Киш с тунцом и каперсами (вес 1200 гр, диаметр 25 см)',
-    imgURL: 'https://drive.google.com/file/d/1L-5C434b54W-VFnaJM2c_X-Sw0Z8DyvY/view?usp=sharing',
+    imgURL: 'https://i.ibb.co/b21czbK/c4d08a9f-33b8-46c9-aa7b-8c144fabfc2c.jpg',
   },
 ];
 
-// Bake.insertMany(bakes).then(() => {
-//   mongoose.connection.close();
-// });
+Bake.insertMany(bakes).then(() => {
+  mongoose.connection.close();
+});
