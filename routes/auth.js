@@ -27,7 +27,6 @@ router.get('/signin', (req, res) => {
 });
 
 // авторизация
-// ! добавить mongoose.model
 router.post('/signin', async (req, res) => {
   const {
     login,
@@ -132,12 +131,9 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
 
 // Выход
 router.get('/signout', (req, res, next) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return next(err);
-    }
-    return res.redirect('/');
-  });
+  console.log('------->', req.session.user);
+  req.session = null;
+  res.redirect('/');
 });
 
 module.exports = router;

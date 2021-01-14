@@ -14,7 +14,7 @@ document.forms.signinForm?.addEventListener('submit', async (event) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: event.target.username.value,
+        login: event.target.login.value,
         password: event.target.password.value,
       }),
     });
@@ -28,12 +28,12 @@ document.forms.signinForm?.addEventListener('submit', async (event) => {
 });
 
 // Очищаем кастомные сообщения об ошибках при новом вводе
-if (document.forms.signinForm) {
-  [
-    document.forms.signinForm.username,
-    document.forms.signinForm.password,
-  ].forEach((input) => input.addEventListener('input', (event) => {
-    event.target.setCustomValidity('');
-    event.target.checkValidity();
-  }));
-}
+// if (document.forms.signinForm) {
+//   [
+//     document.forms.signinForm.username,
+//     document.forms.signinForm.password,
+//   ].forEach((input) => input.addEventListener('input', (event) => {
+//     event.target.setCustomValidity('');
+//     event.target.checkValidity();
+//   }));
+// }

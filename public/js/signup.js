@@ -8,12 +8,6 @@ document.forms.signupForm?.addEventListener('submit', async (event) => {
   let response;
   try {
     event.preventDefault();
-    console.log(event.target.name.value,
-      event.target.login.value,
-      event.target.phoneNumber.value,
-      event.target.email.value,
-      event.target.password.value,
-    );
     response = await fetch(action, {
       method,
       headers: {
