@@ -7,7 +7,7 @@ const bakes = [
   {
     title: 'Киш',
     desctription: 'Киш с курицей и брокколи (вес 1200 гр, диаметр 25 см)',
-    imgURL: 'https://drive.google.com/file/d/1m4lIpbh05tBe56dhxvacWenipzr9MDWI/view?usp=sharing',
+    imgURL: 'https://i.ibb.co/x81MTt6/photo5413884260785434681.jpg',
   },
   {
     title: 'Киш',

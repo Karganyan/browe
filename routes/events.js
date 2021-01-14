@@ -1,5 +1,6 @@
 const express = require('express');
 const Event = require('../models/event');
+const auth = require('../middlewares/auth');
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.get('/', async (req, res) => {
 
 // записаться
 // ! написать fetch и переделать на patch // должна меняться на отписаться
-router.post('/signup/:id', (req, res) => {
+router.post('/signup/:id', auth, (req, res) => {
   res.redirect('/events');
 });
 
