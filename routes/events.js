@@ -6,7 +6,7 @@ const router = express.Router();
 // страница с мероприятиями
 // ! добавить базу
 router.get('/', async (req, res) => {
-  const events = await Event.find({ visible: true })
+  const events = await Event.find({ visible: true });
   res.render('events', {
     title: 'BRO.WE.COFFE',
     isCoffe: true,
