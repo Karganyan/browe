@@ -54,26 +54,26 @@ router.get('/signup', (req, res) => {
 
 // регистрация
 // ! добавить mongoose.model
-router.post('/signup', async (req, res) => {
-  const { username, password, email } = req.body;
-  try {
-    // Мы не храним пароль в БД, только его хэш
-    const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
-    console.log('saltRounds', saltRounds);
-    console.log('password', password);
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const user = await User.create({
-      username,
-      password: hashedPassword,
-      email,
-    });
-    req.session.user = serializeUser(user);
-  } catch (err) {
-    logger.error(err);
-    return failAuth(res);
-  }
-  return res.end();
-});
+// router.post('/signup', async (req, res) => {
+//   const { username, password, email } = req.body;
+//   try {
+//     // Мы не храним пароль в БД, только его хэш
+//     const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
+//     console.log('saltRounds', saltRounds);
+//     console.log('password', password);
+//     const hashedPassword = await bcrypt.hash(password, saltRounds);
+//     const user = await User.create({
+//       username,
+//       password: hashedPassword,
+//       email,
+//     });
+//     req.session.user = serializeUser(user);
+//   } catch (err) {
+//     logger.error(err);
+//     return failAuth(res);
+//   }
+//   return res.end();
+// });
 
 // Выход
 router.get('/signout', (req, res, next) => {
