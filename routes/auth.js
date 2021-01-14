@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
+const User = require('../models/user')
 
 const logger = console;
 const router = express.Router();
@@ -111,12 +112,35 @@ const isLoggedIn = (req, res, next) => {
 router.get('/failed', (req, res) => {
   res.send('You Failed to log in!')
 })
-router.get('/good', isLoggedIn, (req, res) => {
-  res.render('coffee', { name: req.user.displayName })
-
+router.get('/good', isLoggedIn, async (req, res) => {
+  const name = req.user.displayName
+  const email = req.user.emails[0].value
+  const user = await User.findOne({ email })
+  
+  if (!user) {
+    function generateRandom() {
+      let alphabet = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
+      let random = '';
+      for(let i = 0; i < 9; i++){
+        random += alphabet[Math.round(Math.random() * (alphabet.length - 1))];
+      }
+      return random
+    }
+    const login = generateRandom()
+    const password = generateRandom()
+    
+    const newUser = await new User({ name, login, password, email })
+    newUser.save()
+    
+    res.render('coffee', { name: req.user.displayName })
+  } else {
+    res.render('coffee', { name: req.user.displayName })
+  }
 })
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
+  
+
   function(req, res) {
     res.redirect('/auth/good');
   }
