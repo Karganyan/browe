@@ -1,6 +1,8 @@
-
+{{#if admin}}
+<a href="/bakery/new">Добавить</a>
+{{/if}}
 {{#each bakes}}
-<div class="card">
+<div class="bakerycard card">
   <div class="card-image">
     <figure class="image is-4by3">
       <img src="{{imgURL}}" alt="Placeholder image">
@@ -14,12 +16,16 @@
       </div>
       <div class="media-content">
         <p class="title is-4">{{title}}</p>
-     {{!--    <p class="subtitle is-6">{{price}}</p> --}}
+        {{!-- <p class="subtitle is-6">{{price}}</p> --}}
       </div>
     </div>
     <div class="content">
       {{desctription}}
     </div>
+    {{#if ../admin}}
+    <a href="/bakery/edit/{{this._id}}">Редактировать</a>
+    <a href="/bakery/delete/{{this._id}}" data-deletebake="deletebake">Удалить</a>
+    {{/if}}
   </div>
 </div>
 {{/each}}
