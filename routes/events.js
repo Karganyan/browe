@@ -32,17 +32,17 @@ router.post('/signup', auth, async (req, res) => {
   const user = await User.findById(userid);
   user.events.push(event);
   await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
-  res.redirect('/events/events');
+  res.send('OK');
 });
 
 router.delete('/singout', auth, async (req, res) => {
   const { userid, eventid } = req.body;
-  res.locals.user.events.push(eventid);
-  const event = await Event.findById(eventid);
-  const user = await User.findById(userid);
-  user.events.push(event);
-  await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
-  res.redirect('/events');
+  const index = res.locals.user.events.indexOf(eventid);
+  if (index > -1) {
+    res.locals.user.events.splice(index, 1);
+  }
+  await User.findByIdAndUpdate({ _id: userid }, { events: res.locals.user.events });
+  res.send('deleted');
 });
 
 router.delete('/delete/:id', async (req, res) => {

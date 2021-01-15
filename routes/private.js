@@ -53,7 +53,7 @@ router.get('/', authMiddleware, async (req, res) => {
   // })
 
   // Отправить массив событий после сортировки
-  res.render('private', { test });
+  res.render('private');
 });
 
 module.exports = router;
