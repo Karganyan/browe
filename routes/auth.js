@@ -138,7 +138,7 @@ router.get('/good', isLoggedIn, async (req, res) => {
     
     const password = generateRandom()
 
-    const newUser = await new User({ name, login, password, email })
+    const newUser = await new User({ name, login: email, password, email })
     await newUser.save()
     req.session.user = serializeUser(newUser);
     res.redirect('/');

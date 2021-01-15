@@ -1,0 +1,30 @@
+<div class="privateEvent">
+  <button class="btnforevent button is-light events" data-userid={{user.id}} >Мои мероприятия</button>
+  <button class="btnforevent button is-light profile" data-userid={{user.id}} >Редактировать профиль</button>
+</div>
+
+{{#each test}}
+<div class="is-four-fifths" >
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-4by3">
+        <img src="{{imgURL}}" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+        </div>
+        <div class="media-content">
+          <p class="title is-4">{{theme}}</p>
+          <p class="title is-4">{{desctription}}</p>
+          <p class="subtitle is-6">{{descriptionDate}}</p>
+          <p class="urlChat is-6">{{urlChat}}</p>
+          <a href="{{urlChat}}"><img src="/Telegram-icon.png" alt="telegram-icon"></a>
+        </div>
+      </div>
+      <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{user.id}} >Отписаться</button>
+    </div>
+  </div>
+</div>
+{{/each}}

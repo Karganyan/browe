@@ -10,4 +10,5 @@ const eventSchema = mongoose.Schema({
   urlChat: String,
 });
 
+
 module.exports = mongoose.model('Event', eventSchema);

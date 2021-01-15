@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
     minlength: 4,
-    match: /^[A-Z]\w+$/i,
+    // match: /^[A-Z]\w+$/i,
   },
   // Мы не храним пароль, а только его хэш
   password: {
