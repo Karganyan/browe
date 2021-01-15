@@ -2,6 +2,8 @@ const body = document.getElementsByTagName('body')[0];
 body.addEventListener('click', async (e) => {
   if (e.target.classList.contains('btnforevent')) {
     if (e.target.classList.contains('press-event-button')) {
+      e.preventDefault()
+      
       const { userid } = e.target.dataset;
       const { eventid } = e.target.dataset;
       await fetch('/events/signup', {
@@ -48,3 +50,8 @@ container.addEventListener('click', async (e) => {
     }
   }
 });
+const private = document.querySelector('.privateEvent')
+
+// private.addEventListener('click', (e) => {
+//   if ()
+// })
