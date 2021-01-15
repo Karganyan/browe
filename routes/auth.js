@@ -124,11 +124,8 @@ router.get('/good', isLoggedIn, async (req, res) => {
   const name = req.user.displayName
   const email = req.user.emails[0].value
   const login = req.user.name.givenName
-  // console.log(req.user.name.givenName);
-  console.log(login, name, email, '<<<<===========================');
   
   const user = await User.findOne({ email })
-  console.log('DO IFA', user);
   if (!user) {
     function generateRandom() {
       let alphabet = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
@@ -143,7 +140,6 @@ router.get('/good', isLoggedIn, async (req, res) => {
 
     const newUser = await new User({ name, login, password, email })
     await newUser.save()
-    console.log('DO USERA!!!!!!!!!!!!!!!!!!!!!!!!', newUser);
     req.session.user = serializeUser(newUser);
     res.redirect('/');
   } else {
