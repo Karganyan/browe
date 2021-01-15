@@ -1,30 +1,28 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav  class="navbar">
   <div class="navbar-brand">
-    <a class="navbar-item" href="/">
+    <a id="navbar" class="navbar-item" href="/">
       <div class="logo">
         <div class="logo-text">
-          <h1 id="neon-tubing">BR<span></span>O.WE</h1>
+          <h1 id="neon-tubing">BR<span>O.</span>WE</h1>
           <p style="color: black; font-size: 13px">ЭКСПРЕССОВАРНЯ</p>
         </div>
       </div>
     </a>
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item" href="/">
         Кофе
       </a>
-
       <a class="navbar-item" href="/events">
         Мероприятия
       </a>
-
       <a class="navbar-item" href="/bakery">
         Пекарня
       </a>
@@ -35,31 +33,32 @@
         Контакты
       </a>
     </div>
-  </div>
-  {{#if user}}
-  <div class="navbar-end">
-    <div class="navbar-item">
-      <div class="buttons">
-        <a href=''>{{ user.login }}</a>
-        <a href="/auth/signout" class="button is-primary">
-          <strong>Выйти</strong>
-        </a>
-      </div>
-    </div>
-  </div>
-  {{else}}
-  <div class="navbar-end">
-    <div class="navbar-item">
-      <div class="buttons">
-        <a href="/auth/signup" class="button is-primary">
-          <strong>Регистрация</strong>
-        </a>
-        <a href="/auth/signin" class="button is-light">
-          {{!-- <a class="button is-light" href="/auth/google"> --}}
-            Войти
+
+    {{#if user}}
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a href=''>{{ user.login }}</a>
+          <a href="/auth/signout" class="button is-primary">
+            <strong>Выйти</strong>
           </a>
+        </div>
       </div>
     </div>
+    {{else}}
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a href="/auth/signup" class="button is-danger is-rounded">
+            <strong>Регистрация</strong>
+          </a>
+          <a href="/auth/signin" class="button is-danger is-rounded">
+            {{!-- <a class="button is-light" href="/auth/google"> --}}
+              <strong>Войти</strong>
+            </a>
+        </div>
+      </div>
+    </div>
+    {{/if}}
   </div>
-  {{/if}}
 </nav>

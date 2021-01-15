@@ -1,25 +1,39 @@
 
-{{#each events}}
-<div class="is-four-fifths" >
-  <div class="card">
-    <div class="card-image">
-      <figure class="image is-4by3">
-        <img src="{{imgURL}}" alt="Placeholder image">
-      </figure>
-    </div>
-    <div class="card-content">
-      <div class="media">
-        <div class="media-left">
-        </div>
-        <div class="media-content">
-          <p class="title is-4">{{theme}}</p>
-          <p class="title is-4">{{desctription}}</p>
-          <p class="subtitle is-6">{{descriptionDate}}</p>
+<script defer src="/js/public.js"></script>
+<section class="section">
+  <div class="container  ">
+    <h2 class="title has-text-centered">WE.BRO.EVENTS</h2>
+</p>
+
+    <div class="columns is-centered" style="padding: 2rem">
+      {{#each events}}
+      <div class="eventcard column is-one-quarter">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by5">
+              <img src="{{this.imgURL}}" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <p class="title is-4">{{theme}}</p>
+                <p class="title is-4">{{desctription}}</p>
+                <p class="subtitle is-6">{{descriptionDate}}</p>
+              </div>
+            </div>
+
+            <div class="content">
+              {{this.desctription}}
+            </div>
+          </div>
+          <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{user.id}}>Записаться на
+            мероприятие</button>
+
         </div>
       </div>
-      <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{user.id}} >Записаться на мероприятие</button>
+      {{/each}}
     </div>
   </div>
-</div>
-{{/each}}
-<script src="/js/public.js"></script>
+  </div>
+</section>
