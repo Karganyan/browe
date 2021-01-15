@@ -39,7 +39,7 @@ body.addEventListener('click', async (e) => {
   }
 });
 
-const container = document.querySelector('.container');
+const container = document.getElementById('container');
 container.addEventListener('click', async (e) => {
   if (e.target.dataset.deletecoffee) {
     e.preventDefault();
@@ -68,11 +68,21 @@ container.addEventListener('click', async (e) => {
 });
 const private = document.querySelector('.privateEvent')
 
-  (function () {
-    const burger = document.querySelector('.burger');
-    const menu = document.querySelector('#' + burger.dataset.target);
-    burger.addEventListener('click', function () {
-      burger.classList.toggle('is-active');
-      menu.classList.toggle('is-active');
-    });
-  })();
+private.addEventListener('click', async (e) => {
+  e.preventDefault()
+  if (e.target.dataset.editprofile) {
+    e.preventDefault()
+    const req = await fetch('/private/editProfile')
+    const res = await req.text()
+    container.innerHTML = res
+  }
+})
+
+(function () {
+  const burger = document.querySelector('.burger');
+  const menu = document.querySelector('#' + burger.dataset.target);
+  burger.addEventListener('click', function () {
+    burger.classList.toggle('is-active');
+    menu.classList.toggle('is-active');
+  });
+})();
