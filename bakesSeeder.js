@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-console.log(process.env.DB_URL);
+// console.log(process.env.DB_URL);
 const mongoose = require('mongoose');
 const Bake = require('./models/bake');
 

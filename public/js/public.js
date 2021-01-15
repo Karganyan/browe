@@ -1,5 +1,5 @@
 const body = document.getElementsByTagName('body')[0];
-console.log(body);
+// console.log(body);
 body.addEventListener('click', async (e) => {
   if (e.target.classList.contains('btnforevent')) {
     if (e.target.classList.contains('press-event-button')) {
@@ -16,7 +16,7 @@ body.addEventListener('click', async (e) => {
     } else {
       e.target.classList.remove('unpress-event-button');
       e.target.classList.add('press-event-button');
-      console.log('ghbdtn');
+      // console.log('ghbdtn');
       window.location.replace('/private');
     }
   }
