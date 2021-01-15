@@ -81,20 +81,20 @@ router.get('/signup', (req, res) => {
 // });
 
 // Авторизация через Гугл
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
 passport.use(new GoogleStrategy({
-    clientID: '809063709537-lmecqj5l72ktd9h6jta4llgho5n2h878.apps.googleusercontent.com',
-    clientSecret: 'VLqMRvXWmqtHZs3tMIh9ASN0',
-    callbackURL: "http://localhost:3000/auth/google/callback",
-  },
-  function(accessToken, refreshToken, profile, done) {
+  clientID: '809063709537-lmecqj5l72ktd9h6jta4llgho5n2h878.apps.googleusercontent.com',
+  clientSecret: 'VLqMRvXWmqtHZs3tMIh9ASN0',
+  callbackURL: "http://localhost:3000/auth/google/callback",
+},
+  function (accessToken, refreshToken, profile, done) {
     return done(null, profile);
   }
 ));
@@ -117,7 +117,7 @@ router.get('/good', isLoggedIn, (req, res) => {
 })
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
-  function(req, res) {
+  function (req, res) {
     res.redirect('/auth/good');
   }
 );

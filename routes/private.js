@@ -4,7 +4,7 @@ const authMiddleware = require('../middlewares/auth.js');
 const router = express.Router();
 
 router.get('/', authMiddleware, (req, res) => {
-  res.render('private');
+  res.render('MVP/private');
 });
 
 module.exports = router;
