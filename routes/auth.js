@@ -18,6 +18,7 @@ function serializeUser(user) {
   return {
     id: user?.id,
     login: user.login,
+    events: user?.events,
   };
 }
 
@@ -123,8 +124,10 @@ router.get('/failed', (req, res) => {
 router.get('/good', isLoggedIn, async (req, res) => {
   const name = req.user.displayName
   const email = req.user.emails[0].value
-  const user = await User.findOne({ email })
-  console.log('DO IFA', user);
+  const login = req.user.name.givenName
+  
+  const user = await User.findOne({ email });
+  console.log(req.user);
   if (!user) {
     function generateRandom() {
       let alphabet = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
@@ -134,12 +137,11 @@ router.get('/good', isLoggedIn, async (req, res) => {
       }
       return random
     }
-    const login = name;
+    
     const password = generateRandom()
 
-    const newUser = await new User({ name, login, password, email })
-    newUser.save();
-    console.log('DO USERA', user);
+    const newUser = await new User({ name, login: email, password, email })
+    await newUser.save();
     req.session.user = serializeUser(newUser);
     res.redirect('/');
   } else {
@@ -155,7 +157,6 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
 
 // Выход
 router.get('/signout', (req, res, next) => {
-  console.log('------->', req.session.user);
   req.session = null;
   res.clearCookie();
   res.redirect('/');

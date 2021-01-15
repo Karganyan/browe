@@ -9,7 +9,7 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
-mongoose.connect('mongodb+srv://Artem:Artem@cluster0.o3cuc.mongodb.net/BroWe?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 require('./passport-setup');
 
 const cookieSession = require('cookie-session');
@@ -33,6 +33,7 @@ const bakeryRouter = require('./routes/bakery');
 const authRouter = require('./routes/auth');
 const privateRouter = require('./routes/private');
 const adminRouter = require('./routes/admin');
+const { truncate } = require('fs');
 
 const app = express();
 
@@ -61,7 +62,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: process.env.SESSION_SECRET,
-  resave: false,
+  resave: true,
   saveUninitialized: false,
   cookie: {
     secure: false,

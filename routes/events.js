@@ -10,6 +10,8 @@ const router = express.Router();
 // ! добавить базу
 router.get('/', async (req, res) => {
   const events = await Event.find({ visible: true });
+  console.log('---->', res.locals.user);
+  console.log('--->,');
   res.render('events', {
     title: 'BRO.WE.COFFE',
     isCoffe: true,
@@ -17,14 +19,21 @@ router.get('/', async (req, res) => {
   });
 });
 
-// записаться
-// ! написать fetch и переделать на patch // должна меняться на отписаться
 router.post('/signup', auth, async (req, res) => {
   const { userid, eventid } = req.body;
-  console.log(userid, eventid);
+  res.locals.user.events.push(eventid);
   const event = await Event.findById(eventid);
   const user = await User.findById(userid);
-  console.log(event);
+  user.events.push(event);
+  await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
+  res.redirect('/events');
+});
+
+router.delete('/add', auth, async (req, res) => {
+  const { userid, eventid } = req.body;
+  res.locals.user.events.push(eventid);
+  const event = await Event.findById(eventid);
+  const user = await User.findById(userid);
   user.events.push(event);
   await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
   res.redirect('/events');
