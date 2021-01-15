@@ -5,13 +5,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const bakes = await Bake.find({ visible: true });
-<<<<<<< HEAD
-  // console.log(bakes);
-  res.render('bakery', {
-=======
   console.log(bakes);
   res.render('bakery/bakery', {
->>>>>>> ilia
     title: 'BRO.WE.COFFE',
     isCoffe: true,
     bakes,
