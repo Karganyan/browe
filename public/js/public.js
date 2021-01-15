@@ -32,7 +32,7 @@ body.addEventListener('click', async (e) => {
   }
 });
 
-const container = document.querySelector('.container');
+const container = document.getElementById('container');
 container.addEventListener('click', async (e) => {
   if (e.target.dataset.deletecoffee) {
     e.preventDefault();
@@ -61,14 +61,14 @@ container.addEventListener('click', async (e) => {
 });
 const private = document.querySelector('.privateEvent')
 
-// private.addEventListener('click', (e) => {
-//   if ()
-// })
-(function() {
-  const burger = document.querySelector('.burger');
-  const menu = document.querySelector('#'+burger.dataset.target);
-  burger.addEventListener('click', function() {
+  // private.addEventListener('click', (e) => {
+  //   if ()
+  // })
+  (function () {
+    const burger = document.querySelector('.burger');
+    const menu = document.querySelector('#' + burger.dataset.target);
+    burger.addEventListener('click', function () {
       burger.classList.toggle('is-active');
       menu.classList.toggle('is-active');
-  });
-})();
+    });
+  })();
