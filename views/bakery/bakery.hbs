@@ -1,31 +1,48 @@
-{{#if admin}}
-<a href="/bakery/new">Добавить</a>
-{{/if}}
-{{#each bakes}}
-<div class="bakerycard card">
-  <div class="card-image">
-    <figure class="image is-4by3">
-      <img src="{{imgURL}}" alt="Placeholder image">
-    </figure>
-  </div>
-  <div class="card-content">
-    <div class="media">
-      <div class="media-left">
-        <figure class="image is-48x48">
-        </figure>
+<section id="coffe" class="section">
+  <div class="container ">
+    <section id="prev" class="section">
+      <div class="container">
+        <h2 class="title has-text-centered subtitle is-1">WE.BRO.SUGAR</h2>
       </div>
-      <div class="media-content">
-        <p class="title is-4">{{title}}</p>
-        {{!-- <p class="subtitle is-6">{{price}}</p> --}}
+    </section>
+
+    <div class="section">
+      <div class="columns">
+        <div class="column is-12 ">
+          <h2 class="title">Меню нашей пекарни</h2>
+          <div id="app" class="row columns is-multiline">
+            {{#if admin}}
+            <a href="/bakery/new">Добавить</a>
+            {{/if}}
+            {{#each bakes}}
+            <div class="column is-4">
+              <div class="card large">
+                <div class="card-image">
+                  <figure class="image is-1by1"><a href={{this.imgURL}}><img src={{this.imgURL}} alt="Image"></a>
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title is-4 no-padding">{{this.title}}</p>
+                    </div>
+                  </div>
+                  <div class="content">
+                    {{this.desctription}}
+                    <div class="background-icon"><span class="icon-twitter"></span></div>
+                  </div>
+                  <div class="media-left">
+                  </div>
+                </div>
+                {{#if ../admin}}
+                <a href="/bakery/edit/{{this._id}}">Редактировать</a>
+                <a href="/bakery/delete/{{this._id}}" data-deletecoffee="deletecoffee">Удалить</a>
+                {{/if}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="content">
-      {{desctription}}
-    </div>
-    {{#if ../admin}}
-    <a href="/bakery/edit/{{this._id}}">Редактировать</a>
-    <a href="/bakery/delete/{{this._id}}" data-deletebake="deletebake">Удалить</a>
-    {{/if}}
-  </div>
-</div>
-{{/each}}
+</section>
