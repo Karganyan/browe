@@ -25,7 +25,7 @@ const events = [
     theme: 'Theme',
     desctription: 'Обсуждаем мэтров и разные метры',
     descriptionDate: 'Встречи проходят в выходные дни',
-    imgURL: 'https://i.ibb.co/ys70Qs9/d6f643ed-5235-4743-80db-2095de34f6e1.jpg',
+    imgURL: 'https://i.ibb.co/7YqQLnf/1e4323ec-c994-49d2-a124-ac2bc792b9a7.jpg',
     urlChat: 'https://t.me/browecinema',
   },
 ];

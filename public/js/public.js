@@ -1,9 +1,11 @@
-const buttons = document.querySelectorAll('.btnforevent');
+const btn = document.querySelectorAll('.btnforevent');
 
-for (let i = 0; i < buttons.length; i++) {
-  const { eventid, userevents } = buttons[i].dataset;
-  if (userevents.includes(eventid)) {
-    buttons[i].innerText = 'Вы записаны!';
+for (let i = 0; i < btn.length; i++) {
+  const { eventid, userevents } = btn[i].dataset;
+  if (userevents) {
+    if (userevents.includes(eventid)) {
+      btn[i].innerText = 'Вы записаны!';
+    }
   }
 }
 
@@ -11,23 +13,28 @@ const body = document.getElementsByTagName('body')[0];
 body.addEventListener('click', async (e) => {
   if (e.target.classList.contains('btnforevent')) {
     const { eventid, userid } = e.target.dataset;
-    // if (e.target.innerText === 'Вы записаны!') {
-    //   await fetch('/events/signup', {
-    //     method: 'DELETE',
-    //     headers: { 'Content-type': 'application/json' },
-    //     body: JSON.stringify({ userid, eventid }),
-    //   });
-    // }
-    if (!e.target.classList.contains('press-event-button')) {
-      await fetch('/events/signup', {
+    if (e.target.innerText === 'Вы записаны!') {
+      const deleteEventFetch = await fetch('/events/singout', {
+        method: 'DELETE',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ userid, eventid }),
+      });
+      const res = await deleteEventFetch.text();
+      if (res === 'deleted') {
+        e.target.innerText = 'Записаться на мероприятие';
+      }
+    } else {
+      e.target.innerText = 'Вы записаны!';
+      const postEventFetch = await fetch('/events/signup', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ userid, eventid }),
       });
-      e.target.classList.add('press-event-button');
-      window.location.replace('/private');
-    } else {
-      e.target.classList.remove('press-event-button');
+      let res = await postEventFetch.text();
+      console.log(res);
+      if (res === 'OK') {
+        window.location.replace('/private');
+      }
     }
   }
 });
@@ -59,11 +66,18 @@ container.addEventListener('click', async (e) => {
     }
   }
 });
-const private = document.querySelector('.privateEvent')
+const privateEvent = document.querySelector('.privateEvent')
 
-  // private.addEventListener('click', (e) => {
-  //   if ()
-  // })
+privateEvent?.addEventListener('click', async (e) => {
+  e.preventDefault()
+  if (e.target.dataset.editprofile) {
+    e.preventDefault()
+    const req = await fetch('/private/editProfile')
+    const res = await req.text()
+    container.innerHTML = res
+  }
+})
+
   (function () {
     const burger = document.querySelector('.burger');
     const menu = document.querySelector('#' + burger.dataset.target);

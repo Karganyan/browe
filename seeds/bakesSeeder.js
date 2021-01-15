@@ -2,9 +2,9 @@ require('dotenv').config();
 
 // console.log(process.env.DB_URL);
 const mongoose = require('mongoose');
-const Bake = require('./models/bake');
+const Bake = require('../models/bake');
 
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://Artem:Artem@cluster0.o3cuc.mongodb.net/BroWe?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const bakes = [
   {
