@@ -8,42 +8,6 @@ router.get('/', authMiddleware, async (req, res) => {
   const userId = req.session.user.id
   console.log(userId);
 
-  const test = [{
-    title: 'Название',
-    theme: 'Тема',
-    desctription: 'Описание',
-    descriptionDate: 'Дата мероприятия?',
-    imgURL: { type: String, default: 'There is no picture' },
-    visible: { type: Boolean, default: true },
-    urlChat: 't.me/Vikt0rFrost',
-  },{
-    title: 'Название',
-    theme: 'Тема',
-    desctription: 'Описание',
-    descriptionDate: 'Дата мероприятия?',
-    imgURL: { type: String, default: 'There is no picture' },
-    visible: { type: Boolean, default: true },
-    urlChat: 't.me/Vikt0rFrost',
-  },
-  {
-    title: 'Название',
-    theme: 'Тема',
-    desctription: 'Описание',
-    descriptionDate: 'Дата мероприятия?',
-    imgURL: { type: String, default: 'There is no picture' },
-    visible: { type: Boolean, default: true },
-    urlChat: 't.me/Vikt0rFrost',
-  },
-  {
-    title: 'Название',
-    theme: 'Тема',
-    desctription: 'Описание',
-    descriptionDate: 'Дата мероприятия?',
-    imgURL: { type: String, default: 'There is no picture' },
-    visible: { type: Boolean, default: true },
-    urlChat: 't.me/Vikt0rFrost',
-  }]
-
   const user = await User.findOne({ _id: userId })
   const userEvents = user.events
   
@@ -53,7 +17,30 @@ router.get('/', authMiddleware, async (req, res) => {
   // })
 
   // Отправить массив событий после сортировки
-  res.render('private', { test });
+  res.render('private', { userEvents });
 });
 
+router.get('/editProfile', (req,res) => {
+  res.render('profile', {layout: false})
+})
+
+router.post('/', async (req,res) => {
+  const userId = req.session.user.id
+  
+  const {name, login, phoneNumber, email, password} = req.body
+  let update = {name, login, phoneNumber, email, password}
+  let updateFiltered = Object.keys(update).reduce((acc, key) => {
+    if (update[key].trim()) {
+      acc[key] = update[key].trim()
+    }
+    return acc
+  }, {})
+
+  console.log(req.body)
+  console.log(updateFiltered)
+
+  const user = await User.findOneAndUpdate({ _id: userId }, updateFiltered, {new: true})
+  // console.log(user)
+  return res.redirect('/private')
+})
 module.exports = router;
