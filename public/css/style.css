@@ -1,19 +1,16 @@
 * {
   margin: 0;
   padding: 0;
+  color: aliceblue !important;
 }
 
 body {
-  display: flex;
   min-height: 100vh;
   flex-direction: column;
-  
+  display: flex;
+ 
 }
 
-.container {
-  margin-top: 200px;
-  flex: 1 0 auto;
-}
 
 .logo {
   text-align: center;
@@ -27,8 +24,7 @@ body {
   background-size: 100%;
   justify-content: center;
   align-items: center;
-  color: rgb(255, 255, 255);
-  height: 130px;
+  height: 80px;
   display: table-cell;
   vertical-align: middle;
 }
@@ -44,39 +40,49 @@ body {
 h1#neon-tubing {
 	text-align: center;
 	font-family: Neon80sRegular, sans-serif;
-	font-size: 40px;
+	font-size: 50px;
 	letter-spacing: 1rem;
 	background-size: cover;
-  color: #ff4081 pink accent-2
+  
 
 }
 @keyframes neonspark  {
 	0% {
+  
 		text-shadow: none;
 	}
 	30% {
-		text-shadow: 0 0 30px rgba(255,0,84,0.6);
+		text-shadow: 0 0 30px rgb(255, 0, 0);
 	}
 	60% {
-		text-shadow: 0 0 30px rgba(255,0,84,0.6),
-		  0 0 60px rgba(255,0,84,0.4);
+		text-shadow: 0 0 30px rgb(255, 0, 0),
+		  0 0 60px rgb(255, 0, 0);
 	}
 	80% {
+  
 		text-shadow: none;
 	}
 	100% {
-		text-shadow: 0 0 30px rgba(255,0,84,0.6),
-		 0 0 60px rgba(255,0,84,0.4), 
-		 0 0 100px rgba(255,0,84,0.2), 
-		 0 0 90px rgba(255,0,84,0.1);
+    
+		text-shadow: 0 0 60px rgb(255, 0, 0),
+		 0 0 60px rgb(255, 0, 0), 
+		 0 0 800px rgb(255, 0, 0), 
+     0 0 90px rgb(255, 0, 0);
+     
 	}
 }
 h1#neon-tubing {
-	animation: neonspark 1s 3s forwards;
+  animation: neonspark 1s 3s forwards;
+  
+
 	}
 h1#neon-tubing span {
-		animation: neonspark 1s 2s infinite;
-	}
+  animation: neonspark 4s 3s infinite;
+  }
+  
+  .navbar-item .navbar-link {
+    color: white !important;
+  }
 /* ------------------------------------ */
 
   .sign {
@@ -95,4 +101,87 @@ h1#neon-tubing span {
 .img {
   width: 30px;
   height: 30px;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 50px !important
+}
+
+.menu .card  .card-image {
+  max-width: 300px;
+  max-height: 400px;
+}
+
+.navbar-item {
+padding: 10px !important;
+}
+
+i img {
+  width: 60px;
+  border-radius: 13px;
+  margin-right: 20px;
+}
+
+.footer {
+  background-color: unset !important;
+  padding-bottom: 1.5rem !important;
+  margin-top: auto;
+  background: rgba(0,0,0,.7) !important; 
+  z-index: 3;
+}
+
+.columns.is-centered {
+  flex-wrap: wrap !important;
+}
+
+.column {
+  flex-basis: unset !important
+}
+.navbar {
+  background-color: transparent !important;
+}
+
+body::after {
+  content: "";
+  background: url('https://picjumbo.com/wp-content/uploads/coffee-beans-with-place-for-text-2210x1473.jpg');
+  opacity: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-size: 100%;
+  position: fixed;
+}
+
+a.navbar-item:hover {
+  background-color:  unset !important;
+  text-decoration: underline;
+  color: red !important
+}
+
+#navbar {
+  text-decoration: none !important;
+}
+
+#prev {
+  border-radius: 30px;
+  background: rgba(0,0,0,.7);
+  z-index: 3;
+}
+
+.navbar-item {
+  font-size: 25px;
+}
+
+.title.is-4 {
+  padding: unset !important;
+  color: black !important
 }

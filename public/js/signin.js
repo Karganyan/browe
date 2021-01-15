@@ -1,10 +1,14 @@
 function failSignin(signinForm) {
-  signinForm.username.setCustomValidity('Неверные имя пользователя и/или пароль.');
-  signinForm.username.reportValidity();
+  signinForm.login.setCustomValidity('Неверные имя пользователя и/или пароль.');
+  signinForm.login.reportValidity();
+  setTimeout(() => {
+    signinForm.login.setCustomValidity('');
+  }, 3000);
 }
 
 document.forms.signinForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
+  console.log('This is signinForm');
   const { method, action } = event.target;
   let response;
   try {
@@ -22,18 +26,8 @@ document.forms.signinForm?.addEventListener('submit', async (event) => {
     return failSignin(event.target);
   }
   if (response.status !== 200) {
+    console.log('Response from server 200');
     return failSignin(event.target);
   }
   return window.location.assign('/coffee');
 });
-
-// Очищаем кастомные сообщения об ошибках при новом вводе
-// if (document.forms.signinForm) {
-//   [
-//     document.forms.signinForm.username,
-//     document.forms.signinForm.password,
-//   ].forEach((input) => input.addEventListener('input', (event) => {
-//     event.target.setCustomValidity('');
-//     event.target.checkValidity();
-//   }));
-// }

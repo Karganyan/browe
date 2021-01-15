@@ -7,18 +7,24 @@ const auth = require('../middlewares/auth');
 const router = express.Router();
 
 // страница с мероприятиями
-// ! добавить базу
 router.get('/', async (req, res) => {
   const events = await Event.find({ visible: true });
-  console.log('---->', res.locals.user);
-  console.log('--->,');
-  res.render('events', {
+  res.render('events/events', {
     title: 'BRO.WE.COFFE',
     isCoffe: true,
     events,
   });
 });
 
+router.get('/edit/:id', async (req, res) => {
+  res.render('events/edit');
+});
+
+router.get('/new', async (req, res) => {
+  res.render('events/new');
+});
+
+// записаться
 router.post('/signup', auth, async (req, res) => {
   const { userid, eventid } = req.body;
   res.locals.user.events.push(eventid);
@@ -37,6 +43,17 @@ router.delete('/singout', auth, async (req, res) => {
   user.events.push(event);
   await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
   res.redirect('/events');
+});
+
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    event.visible = false;
+    await event.save();
+    res.sendStatus(200);
+  } catch (err) {
+    res.sendStatus(500);
+  }
 });
 
 module.exports = router;

@@ -1,6 +1,33 @@
 function failSignup(signupForm) {
-  signupForm.login.setCustomValidity('Вероятно, что вы уже зарегистрированы.');
+  signupForm.name.setCustomValidity('Проверьте введенные данные');
+  signupForm.name.reportValidity();
+  setTimeout(() => {
+    signupForm.name.setCustomValidity('');
+  }, 3000);
+}
+
+function failSignupLogin(signupForm) {
+  signupForm.login.setCustomValidity('Логин уже занят');
   signupForm.login.reportValidity();
+  setTimeout(() => {
+    signupForm.login.setCustomValidity('');
+  }, 3000);
+}
+
+function failSignupEmail(signupForm) {
+  signupForm.email.setCustomValidity('Email уже используется');
+  signupForm.email.reportValidity();
+  setTimeout(() => {
+    signupForm.email.setCustomValidity('');
+  }, 3000);
+}
+
+function failSignupPhone(signupForm) {
+  signupForm.phoneNumber.setCustomValidity('Этот номер уже используется');
+  signupForm.phoneNumber.reportValidity();
+  setTimeout(() => {
+    signupForm.phoneNumber.setCustomValidity('');
+  }, 3000);
 }
 
 document.forms.signupForm?.addEventListener('submit', async (event) => {
@@ -24,22 +51,14 @@ document.forms.signupForm?.addEventListener('submit', async (event) => {
   } catch (err) {
     return failSignup(event.target);
   }
-  if (response.status !== 200) {
-    return failSignup(event.target);
+  if (response.status === 401) {
+    return failSignupLogin(event.target);
+  }
+  if (response.status === 403) {
+    return failSignupPhone(event.target);
+  }
+  if (response.status === 402) {
+    return failSignupEmail(event.target);
   }
   return window.location.assign('/coffee');
 });
-
-// Очищаем кастомные сообщения об ошибках при новом вводе
-// if (document.forms.signupForm) {
-//   [
-//     document.forms.signupForm.login,
-//     document.forms.signupForm.name,
-//     document.forms.signupForm.phoneNumber,
-//     document.forms.signupForm.email,
-//     document.forms.signupForm.password,
-//   ].forEach((input) => input.addEventListener('input', (event) => {
-//     event.target.setCustomValidity('');
-//     event.target.checkValidity();
-//   }));
-// }

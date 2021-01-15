@@ -41,6 +41,7 @@ router.post('/signin', async (req, res) => {
     }
     // Сравниваем хэш в БД с хэшем введённого пароля
     const isValidPassword = await bcrypt.compare(password, user.password);
+    console.log(isValidPassword);
     if (!isValidPassword) {
       return failAuth(res);
     }
@@ -66,12 +67,20 @@ router.post('/signup', async (req, res) => {
     email,
     phoneNumber,
   } = req.body;
-  console.log('----------->', name,
-    login,
-    password,
-    email,
-    phoneNumber);
   try {
+    // Проверка занят ли логин в БД
+    const checkEmail = await User.findOne({ email });
+    const checkUser = await User.findOne({ login });
+    const checkPhone = await User.findOne({ phoneNumber });
+    if (checkUser) {
+      return failAuth(res);
+    }
+    if (checkEmail) {
+      return res.status(402).end();
+    }
+    if (checkPhone) {
+      return res.status(403).end();
+    }
     // Мы не храним пароль в БД, только его хэш
     const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
     const hashedPassword = await bcrypt.hash(password, saltRounds);
