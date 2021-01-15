@@ -1,25 +1,22 @@
-// ! username исправить на email
-/**
- * Выдает ошибку при неверной регистрации
- * @param {HTMLFormElement} signupForm Форма регистрации
- */
 function failSignup(signupForm) {
-  signupForm.username.setCustomValidity('Вероятно, что вы уже зарегистрированы.');
-  signupForm.username.reportValidity();
+  signupForm.login.setCustomValidity('Вероятно, что вы уже зарегистрированы.');
+  signupForm.login.reportValidity();
 }
-const form = document.getElementById('signupForm');
-form?.addEventListener('submit', async (event) => {
-  event.preventDefault();
+
+document.forms.signupForm?.addEventListener('submit', async (event) => {
   const { method, action } = event.target;
   let response;
   try {
+    event.preventDefault();
     response = await fetch(action, {
       method,
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: event.target.username.value,
+        name: event.target.name.value,
+        login: event.target.login.value,
+        phoneNumber: event.target.phoneNumber.value,
         email: event.target.email.value,
         password: event.target.password.value,
       }),
@@ -30,17 +27,19 @@ form?.addEventListener('submit', async (event) => {
   if (response.status !== 200) {
     return failSignup(event.target);
   }
-  return window.location.assign('/private');
+  return window.location.assign('/coffee');
 });
 
 // Очищаем кастомные сообщения об ошибках при новом вводе
-if (document.forms.signupForm) {
-  [
-    document.forms.signupForm.username,
-    document.forms.signupForm.email,
-    document.forms.signupForm.password,
-  ].forEach((input) => input.addEventListener('input', (event) => {
-    event.target.setCustomValidity('');
-    event.target.checkValidity();
-  }));
-}
+// if (document.forms.signupForm) {
+//   [
+//     document.forms.signupForm.login,
+//     document.forms.signupForm.name,
+//     document.forms.signupForm.phoneNumber,
+//     document.forms.signupForm.email,
+//     document.forms.signupForm.password,
+//   ].forEach((input) => input.addEventListener('input', (event) => {
+//     event.target.setCustomValidity('');
+//     event.target.checkValidity();
+//   }));
+// }

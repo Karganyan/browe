@@ -1,8 +1,3 @@
-// ! username исправить на email
-/**
- * Выдает ошибку при неверной аутентификации
- * @param {HTMLFormElement} signinForm Форма входа
- */
 function failSignin(signinForm) {
   signinForm.username.setCustomValidity('Неверные имя пользователя и/или пароль.');
   signinForm.username.reportValidity();
@@ -19,7 +14,7 @@ document.forms.signinForm?.addEventListener('submit', async (event) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: event.target.username.value,
+        login: event.target.login.value,
         password: event.target.password.value,
       }),
     });
@@ -29,16 +24,16 @@ document.forms.signinForm?.addEventListener('submit', async (event) => {
   if (response.status !== 200) {
     return failSignin(event.target);
   }
-  return window.location.assign('/private');
+  return window.location.assign('/coffee');
 });
 
 // Очищаем кастомные сообщения об ошибках при новом вводе
-if (document.forms.signinForm) {
-  [
-    document.forms.signinForm.username,
-    document.forms.signinForm.password,
-  ].forEach((input) => input.addEventListener('input', (event) => {
-    event.target.setCustomValidity('');
-    event.target.checkValidity();
-  }));
-}
+// if (document.forms.signinForm) {
+//   [
+//     document.forms.signinForm.username,
+//     document.forms.signinForm.password,
+//   ].forEach((input) => input.addEventListener('input', (event) => {
+//     event.target.setCustomValidity('');
+//     event.target.checkValidity();
+//   }));
+// }

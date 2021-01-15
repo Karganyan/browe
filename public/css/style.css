@@ -79,8 +79,9 @@ h1#neon-tubing span {
 	}
 /* ------------------------------------ */
 
-  h1 {
-    margin: 0;
+  .sign {
+    font-size: 60px;
+    margin-bottom: 10px;
   }
 
 .press-event-button {
@@ -88,4 +89,13 @@ h1#neon-tubing span {
 }
 .navbar-item a{
   padding: 5px 10px 5px 10px
+}
+
+.knopka {
+  font-size: 10px;
+}
+
+.img {
+  width: 30px;
+  height: 30px;
 }

@@ -1,9 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const User = require('../models/user');
 
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
 
 const logger = console;
 const router = express.Router();
@@ -16,8 +16,8 @@ function failAuth(res) {
 // Подготавливает пользователя для записи в сессию
 function serializeUser(user) {
   return {
-    id: user.id,
-    username: user.username, // ! username в зависимости от базы
+    id: user?.id,
+    login: user.login,
   };
 }
 
@@ -27,14 +27,14 @@ router.get('/signin', (req, res) => {
 });
 
 // авторизация
-// ! добавить mongoose.model
-/* router.post('/signin', async (req, res) => {
-  const { username, password } = req.body;
+router.post('/signin', async (req, res) => {
+  const {
+    login,
+    password,
+  } = req.body;
   try {
     // Пытаемся сначала найти пользователя в БД
-    const user = await User.findOne({
-      username,
-    }).exec();
+    const user = await User.findOne({ login });
     if (!user) {
       return failAuth(res);
     }
@@ -49,8 +49,7 @@ router.get('/signin', (req, res) => {
     return failAuth(res);
   }
   return res.end();
-}); */
-
+});
 
 // регистрация
 router.get('/signup', (req, res) => {
@@ -58,27 +57,38 @@ router.get('/signup', (req, res) => {
 });
 
 // регистрация
-// ! добавить mongoose.model
-// router.post('/signup', async (req, res) => {
-//   const { username, password, email } = req.body;
-//   try {
-//     // Мы не храним пароль в БД, только его хэш
-//     const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
-//     console.log('saltRounds', saltRounds);
-//     console.log('password', password);
-//     const hashedPassword = await bcrypt.hash(password, saltRounds);
-//     const user = await User.create({
-//       username,
-//       password: hashedPassword,
-//       email,
-//     });
-//     req.session.user = serializeUser(user);
-//   } catch (err) {
-//     logger.error(err);
-//     return failAuth(res);
-//   }
-//   return res.end();
-// });
+router.post('/signup', async (req, res) => {
+  const {
+    name,
+    login,
+    password,
+    email,
+    phoneNumber,
+  } = req.body;
+  console.log('----------->', name,
+    login,
+    password,
+    email,
+    phoneNumber);
+  try {
+    // Мы не храним пароль в БД, только его хэш
+    const saltRounds = Number(process.env.SALT_ROUNDS ?? 10);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const user = await User.create({
+      login,
+      name,
+      password: hashedPassword,
+      email,
+      phoneNumber,
+    });
+    console.log(user);
+    req.session.user = serializeUser(user);
+  } catch (err) {
+    logger.error(err);
+    return failAuth(res);
+  }
+  return res.end();
+});
 
 // Авторизация через Гугл
 passport.serializeUser(function (user, done) {
@@ -99,38 +109,56 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-
 const isLoggedIn = (req, res, next) => {
   if (req.user) {
     next();
   } else {
     res.sendStatus(401);
   }
-}
+};
 
 router.get('/failed', (req, res) => {
   res.send('You Failed to log in!')
 })
-router.get('/good', isLoggedIn, (req, res) => {
-  res.render('coffee', { name: req.user.displayName })
+router.get('/good', isLoggedIn, async (req, res) => {
+  const name = req.user.displayName
+  const email = req.user.emails[0].value
+  const user = await User.findOne({ email })
+  console.log('DO IFA', user);
+  if (!user) {
+    function generateRandom() {
+      let alphabet = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
+      let random = '';
+      for (let i = 0; i < 9; i++) {
+        random += alphabet[Math.round(Math.random() * (alphabet.length - 1))];
+      }
+      return random
+    }
+    const login = name;
+    const password = generateRandom()
 
+    const newUser = await new User({ name, login, password, email })
+    newUser.save();
+    console.log('DO USERA', user);
+    req.session.user = serializeUser(newUser);
+    res.redirect('/');
+  } else {
+    req.session.user = serializeUser(user);
+    res.redirect('/');
+  }
 })
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/failed' }),
   function (req, res) {
     res.redirect('/auth/good');
-  }
-);
-
+  });
 
 // Выход
 router.get('/signout', (req, res, next) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return next(err);
-    }
-    return res.redirect('/');
-  });
+  console.log('------->', req.session.user);
+  req.session = null;
+  res.clearCookie();
+  res.redirect('/');
 });
 
 module.exports = router;

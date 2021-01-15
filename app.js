@@ -26,7 +26,6 @@ const userMiddleware = require('./middlewares/user.js');
 require('./passport-setup');
 
 const indexRouter = require('./routes/index');
-
 const usersRouter = require('./routes/users');
 const coffeeRouter = require('./routes/coffee');
 const eventsRouter = require('./routes/events');
@@ -51,18 +50,16 @@ app.set('view engine', 'hbs');
 // Доверять первому прокси (для Heroku и прочих)
 app.set('trust proxy', 1);
 
-app.use(cors())
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-  extended: false
+  extended: false,
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-  }), // ! прикрепить базу
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
@@ -72,8 +69,8 @@ app.use(session({
 }));
 app.use(userMiddleware);
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
 app.use('/', indexRouter);

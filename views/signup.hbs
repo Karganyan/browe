@@ -1,9 +1,10 @@
+<h1 class="sign">Форма регистрации</h1>
 
-<form action="/">
+<form action="/auth/signup" method="POST"  name="signupForm">
   <div class="field">
     <label class="label">Name</label>
     <div class="control has-icons-left has-icons-right">
-      <input class="input is-success" type="text" placeholder="Введите имя" required>
+      <input name="name" class="input is-success" type="text" placeholder="Введите имя" required>
       <span class="icon is-small is-left">
         <i class="fas fa-user"></i>
       </span>
@@ -16,7 +17,20 @@
   <div class="field">
     <label class="label">Login</label>
     <div class="control has-icons-left has-icons-right">
-      <input class="input is-success" type="text" placeholder="Введите логин" required>
+      <input name="login" class="input is-success" type="text" placeholder="Введите логин" required>
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Phone number</label>
+    <div class="control has-icons-left has-icons-right">
+      <input name="phoneNumber" class="input is-success" type="tel" placeholder="(___) ___ __ __" required>
       <span class="icon is-small is-left">
         <i class="fas fa-user"></i>
       </span>
@@ -29,7 +43,7 @@
   <div class="field">
     <label class="label">Email</label>
     <div class="control has-icons-left has-icons-right">
-      <input class="input is-danger" type="email" placeholder="Введите почту" required>
+      <input name="email" class="input is-success" type="email" placeholder="Введите почту" required>
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>
@@ -42,7 +56,7 @@
   <div class="field">
     <label class="label">Password</label>
     <div class="control has-icons-left has-icons-right">
-      <input class="input is-danger" type="password" placeholder="Введите пароль" required>
+      <input name="password" class="input is-success" type="password" placeholder="Введите пароль" required>
       <span class="icon is-small is-left">
         <i class="fas fa-envelope"></i>
       </span>
@@ -55,6 +69,12 @@
   <div class="field is-grouped">
     <div class="control">
       <button class="button is-link">Зарегистрироваться</button>
+
     </div>
   </div>
 </form>
+<p>
+<figure class="image is-128x128" style="padding-top: 15px;"><a class="is-rounded " href="/auth/google"><img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/588px-Google_%22G%22_Logo.svg.png"></a>
+</figure>
+</p>
