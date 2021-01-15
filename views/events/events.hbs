@@ -1,6 +1,8 @@
-
+{{#if admin}}
+<a href="/events/new">Добавить</a>
+{{/if}}
 {{#each events}}
-<div class="is-four-fifths" >
+<div class="eventcard is-four-fifths">
   <div class="card">
     <div class="card-image">
       <figure class="image is-4by3">
@@ -17,8 +19,13 @@
           <p class="subtitle is-6">{{descriptionDate}}</p>
         </div>
       </div>
-      <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{user.id}} >Записаться на мероприятие</button>
+      <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{user.id}}>Записаться на
+        мероприятие</button>
     </div>
+    {{#if ../admin}}
+    <a href="/events/edit/{{this._id}}">Редактировать</a>
+    <a href="/events/delete/{{this._id}}" data-deleteevent="deleteevent">Удалить</a>
+    {{/if}}
   </div>
 </div>
 {{/each}}
