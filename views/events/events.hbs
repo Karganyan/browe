@@ -19,8 +19,7 @@
           <p class="subtitle is-6">{{descriptionDate}}</p>
         </div>
       </div>
-      <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{user.id}}>Записаться на
-        мероприятие</button>
+      <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{../user.id}} data-userevents={{../user.events}}>Записаться на мероприятие</button>
     </div>
     {{#if ../admin}}
     <a href="/events/edit/{{this._id}}">Редактировать</a>

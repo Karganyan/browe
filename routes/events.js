@@ -27,6 +27,17 @@ router.get('/new', async (req, res) => {
 // записаться
 router.post('/signup', auth, async (req, res) => {
   const { userid, eventid } = req.body;
+  res.locals.user.events.push(eventid);
+  const event = await Event.findById(eventid);
+  const user = await User.findById(userid);
+  user.events.push(event);
+  await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
+  res.redirect('/events');
+});
+
+router.delete('/add', auth, async (req, res) => {
+  const { userid, eventid } = req.body;
+  res.locals.user.events.push(eventid);
   const event = await Event.findById(eventid);
   const user = await User.findById(userid);
   user.events.push(event);
