@@ -26,13 +26,14 @@ router.get('/new', async (req, res) => {
 
 // записаться
 router.post('/signup', auth, async (req, res) => {
-  const { userid, eventid } = req.body;
+  const { userid, eventid } = req.body; 
   res.locals.user.events.push(eventid);
   const event = await Event.findById(eventid);
   const user = await User.findById(userid);
+  console.log(userid);
   user.events.push(event);
   await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
-  res.send('OK');
+  return res.send('OK');
 });
 
 router.delete('/singout', auth, async (req, res) => {

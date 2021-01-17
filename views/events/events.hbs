@@ -1,46 +1,52 @@
-<script defer src="/js/public.js"></script>
-<section class="section">
-  <div class="container  ">
-    <h2 class="title has-text-centered">WE.BRO.EVENTS</h2>
-    </p>
-
-    <div class="columns is-centered" style="padding: 2rem">
-      {{#if admin}}
-      <a href="/events/new">Добавить</a>
-      {{/if}}
-      {{#each events}}
-      <div class="eventcard column is-one-quarter">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by5">
-              <img src="{{this.imgURL}}" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-content">
-                <p class="title is-4">{{theme}}</p>
-                <p class="title is-4">{{desctription}}</p>
-                <p class="subtitle is-6">{{descriptionDate}}</p>
-              </div>
-            </div>
-
-            <div class="content">
-              {{this.desctription}}
-            </div>
-          </div>
-          <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{../user.id}}
-            data-userevents={{../user.events}}>Записаться на
-            мероприятие</button>
-
-        </div>
-        {{#if ../admin}}
-        <a href="/events/edit/{{this._id}}">Редактировать</a>
-        <a href="/events/delete/{{this._id}}" data-deleteevent="deleteevent">Удалить</a>
-        {{/if}}
+<div class="section">
+  <div class="container ">
+    <section id="prev" class="section">
+      <div class="container">
+        <h2 class="title has-text-centered subtitle is-1">BRO.WE.EVENTS</h2>
       </div>
-      {{/each}}
+    </section>
+
+    <div class="columns">
+      <div class="column is-12 ">
+        <h2 class="title"> </h2>
+
+        <div id="app" class="row columns is-multiline">
+          {{#if admin}}
+          <a href="/events/new">Добавить</a>
+          {{/if}}
+          {{#each events}}
+          <div class="column is-4">
+            <div class="card large">
+              <div class="card-image">
+                <figure class="image is-1by1"><a href={{this.imgURL}}><img src={{this.imgURL}} alt="Image"></a>
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4 no-padding">{{this.title}}</p>
+                  </div>
+                </div>
+                <div class="content">
+                  {{this.desctription}}
+                  <div class="background-icon"><span class="icon-twitter"></span></div>
+                </div>
+                <div class="media-left">
+                  <button class="btnforevent button is-danger is-outlined" data-eventid={{this._id}}  data-userid={{../user.id}} data-userevents={{../user.events}}
+                    >Записаться на
+                    мероприятие</button>
+                </div>
+              </div>
+              {{#if ../admin}}
+              <a href="/events/edit/{{this._id}}">Редактировать</a>
+              <a href="/events/delete/{{this._id}}" data-deletecoffee="deletecoffee">Удалить</a>
+              {{/if}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
     </div>
   </div>
-  </div>
+</div>
 </section>
