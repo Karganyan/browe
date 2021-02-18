@@ -9,48 +9,52 @@ for (let i = 0; i < knopka.length; i++) {
   }
 }
 
-const body = document.getElementsByTagName('body')[0];
-body.addEventListener('click', async (e) => {
-  const { eventid, userid } = e.target.dataset;
-  if (userid) {
-    if (e.target.classList.contains('btnforevent')) {
-      if (e.target.innerText === 'Вы записаны!') {
-        const deleteEventFetch = await fetch('/events/singout', {
-          method: 'DELETE',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify({
-            userid,
-            eventid,
-          }),
-        });
-        const res = await deleteEventFetch.text();
-        if (res === 'deleted') {
-          e.target.innerText = 'Записаться на мероприятие';
+const eventButtons = document.querySelectorAll('.btnforevent');
+if (eventButtons) {
+  eventButtons.forEach((el) => {
+    el.addEventListener('click', async (e) => {
+      const { eventid, userid } = e.target.dataset;
+      if (userid) {
+        if (e.target.classList.contains('btnforevent')) {
+          if (e.target.innerText === 'Вы записаны!') {
+            const deleteEventFetch = await fetch('/events/singout', {
+              method: 'DELETE',
+              headers: {
+                'Content-type': 'application/json',
+              },
+              body: JSON.stringify({
+                userid,
+                eventid,
+              }),
+            });
+            const res = await deleteEventFetch.text();
+            if (res === 'deleted') {
+              e.target.innerText = 'Записаться на мероприятие';
+            }
+          } else {
+            e.target.innerText = 'Вы записаны!';
+            const postEventFetch = await fetch('/events/signup', {
+              method: 'POST',
+              headers: {
+                'Content-type': 'application/json',
+              },
+              body: JSON.stringify({
+                userid,
+                eventid,
+              }),
+            });
+            const res = await postEventFetch.text();
+            if (res === 'OK') {
+              e.target.innerText = 'Вы записаны!';
+            }
+          }
         }
       } else {
-        e.target.innerText = 'Вы записаны!';
-        const postEventFetch = await fetch('/events/signup', {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify({
-            userid,
-            eventid,
-          }),
-        });
-        const res = await postEventFetch.text();
-        if (res === 'OK') {
-          e.target.innerText = 'Вы записаны!';
-        }
+        window.location.replace('/auth/signin');
       }
-    }
-  } else {
-    window.location.replace('/auth/signin');
-  }
-});
+    });
+  });
+}
 
 const container = document.getElementById('container');
 container.addEventListener('click', async (e) => {

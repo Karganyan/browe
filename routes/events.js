@@ -30,7 +30,6 @@ router.post('/signup', auth, async (req, res) => {
   res.locals.user.events.push(eventid);
   const event = await Event.findById(eventid);
   const user = await User.findById(userid);
-  console.log(userid);
   user.events.push(event);
   await User.findByIdAndUpdate({ _id: userid }, { events: user.events });
   return res.send('OK');

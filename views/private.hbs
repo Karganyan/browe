@@ -1,37 +1,52 @@
-<div class="columns">
-  <div class="column">
+<div class="section">
+  <div class="container ">
+    <section id="prev" class="section">
+      <div class="container">
+        <h2 class="title has-text-centered subtitle is-1">Личный кабинет</h2>
+      </div>
+    </section>
+
     <div class="privateEvent">
-      {{!-- <button class="button is-light events" data-userid={{user.id}} data-item="events">Мои мероприятия</button>
-      --}}
-      <button class="button is-light profile" data-userid={{user.id}} data-editprofile="editprofile">Редактировать
+      <button class="button is-danger is-rounded" data-userid={{user.id}} data-editprofile="editprofile">Редактировать
         профиль</button>
     </div>
+    <div class="columns">
+      <div class="column is-12 ">
+        <h2 class="title"> </h2>
 
-    {{#each userEvents}}
-    <div class="is-four-fifths">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-4by3">
-            <img src="{{imgURL}}" alt="Placeholder image">
-          </figure>
-        </div>
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-            </div>
-            <div class="media-content">
-              <p class="title is-4">{{this.theme}}</p>
-              <p class="title is-4">{{this.desctription}}</p>
-              <p class="subtitle is-6">{{this.descriptionDate}}</p>
-              <p class="urlChat is-6">{{this.urlChat}}</p>
-              <a href="{{this.urlChat}}"><img src="/Telegram-icon.png" alt="telegram-icon"></a>
+        <div id="app" class="row columns is-multiline">
+          {{#each userEvents}}
+          <div class="column is-4">
+            <div class="card large">
+              <div class="card-image">
+                <figure class="image is-1by1"><img src={{this.imgURL}} alt="Image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4">{{this.title}}</p>
+                    <p class="title is-4">{{this.desctription}}</p>
+                    <p class="subtitle is-6">{{this.descriptionDate}}</p>
+                    <a href="{{this.urlChat}}"><img src="/Telegram-icon.png" alt="telegram-icon" class="tg-icon"></a>
+                  </div>
+                </div>
+                <div class="media-left">
+                  <button class="btnforevent button is-danger is-outlined" data-eventid={{this._id}} {{#if ../user.id}}
+                    data-userid={{../user.id }} {{else}} data-userid="" {{/if}}
+                    data-userevents={{../user.events}}>Записаться на
+                    мероприятие</button>
+                </div>
+              </div>
+              {{#if ../admin}}
+              <a href="/events/edit/{{this._id}}">Редактировать</a>
+              <a href="/events/delete/{{this._id}}" data-deletecoffee="deletecoffee">Удалить</a>
+              {{/if}}
             </div>
           </div>
-          <button class="btnforevent button is-light" data-eventid={{this._id}} data-userid={{../user.id}}
-            data-userevents={{../user.events}}>Записаться на
-            мероприятие</button>
+          {{/each}}
         </div>
       </div>
-      {{/each}}
     </div>
   </div>
+</div>

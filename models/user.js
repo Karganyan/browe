@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
   },
   phoneNumber: String,
   createAt: { type: Date, default: new Date() },
-  events: [{ type: mongoose.ObjectId, def: 'User' }],
+  events: [{ type: mongoose.ObjectId, def: 'Event' }],
 });
 
 module.exports = mongoose.model('User', userSchema);

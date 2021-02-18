@@ -241,3 +241,21 @@ input {
   height: 50px;
   margin-left: 20px;
 }
+
+.profile-event-card {
+  margin: 20px;
+  width: 400px;
+}
+
+.tg-icon {
+  width: 50px;
+}
+
+.privateEvent {
+  text-align: center;
+  margin: 20px;
+}
+
+#editProfileForm {
+  text-align: center !important;
+}

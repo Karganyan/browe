@@ -32,8 +32,9 @@
                   <div class="background-icon"><span class="icon-twitter"></span></div>
                 </div>
                 <div class="media-left">
-                  <button class="btnforevent button is-danger is-outlined" data-eventid={{this._id}}
-                    data-userevents={{../user.events}} data-userid={{../user.id }}>Записаться на
+                  <button class="btnforevent button is-danger is-outlined" data-eventid={{this._id}} {{#if ../user.id}}
+                    data-userid={{../user.id }} {{else}} data-userid="" {{/if}}
+                    data-userevents={{../user.events}}>Записаться на
                     мероприятие</button>
                 </div>
               </div>
@@ -49,4 +50,3 @@
     </div>
   </div>
 </div>
-</section>
