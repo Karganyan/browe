@@ -259,3 +259,7 @@ input {
 #editProfileForm {
   text-align: center !important;
 }
+
+#name {
+  margin-right: 15px;
+}
