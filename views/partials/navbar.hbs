@@ -1,0 +1,64 @@
+<nav  class="navbar">
+  <div class="navbar-brand">
+    <a id="navbar" class="navbar-item" href="/">
+      <div class="logo">
+        <div class="logo-text">
+          <h1 id="neon-tubing">BR<span>O.</span>W<span id="sp">E</span></h1>
+          <p class="minilogo" style=" font-size: 13px">ЭКСПРЕССОВАРНЯ</p>
+        </div>
+      </div>
+    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/">
+        Кофе
+      </a>
+      <a class="navbar-item" href="/events">
+        Мероприятия
+      </a>
+      <a class="navbar-item" href="/bakery">
+        Пекарня
+      </a>
+      <a class="navbar-item" href="/about">
+        О нас
+      </a>
+      <a class="navbar-item" href="/contacts">
+        Контакты
+      </a>
+    </div>
+  </div>
+  {{#if user}}
+  <div class="navbar-end">
+    <div class="navbar-item">
+      <div class="buttons">
+        <a id='name' href="/private">Привет, {{ user.login }}</a>
+        <a href="/auth/signout" class="button is-primary">
+          <strong>Выйти</strong>
+        </a>
+      </div>
+    </div>
+    {{else}}
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a href="/auth/signup" class="button is-danger is-rounded">
+            <strong>Регистрация</strong>
+          </a>
+          <a href="/auth/signin" class="button is-danger is-rounded">
+            {{!-- <a class="button is-light" href="/auth/google"> --}}
+              <strong>Войти</strong>
+            </a>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</nav>
+

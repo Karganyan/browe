@@ -1,0 +1,63 @@
+<section id="coffe" class="section">
+  <div class="container ">
+    <section id="prev" class="section">
+      <div class="container">
+        <h2 class="title has-text-centered subtitle is-1">BRO.WE.CAFE</h2>
+        <h2 class="subtitle">
+          <p>Хэй, бро! Вот и 2021!
+            Мы хотим поблагодарить всех, кто в 2020 помог нам остаться на своём месте, быть собой и продолжить варить
+            эспрессо! Любая ваша поддержка бесценна, даже если она на расстоянии 🖤
+
+            Для многих Брови стали больше, чем вкусная чашка кофе, а для нас они стали частью нашей большой семьи. Мы
+            все
+            вместе создаём это место, делаем его уникальным и неповторимым. Мы уверены, этот год не будет простым, но
+            подарит
+            много возможностей, новых встреч и тепла несмотря ни на что!
+
+            Всем спасибо!
+
+            Увидимся за стойкой варни!</p>
+        </h2>
+      </div>
+    </section>
+
+    <div class="section">
+      <div class="columns">
+        <div class="column is-12">
+          <h2 class="title">Меню нашей кофейни</h2>
+          <div id="app" class="row columns is-multiline">
+            {{#if admin}}
+            <a href="/coffee/new">Добавить</a>
+            {{/if}}
+            {{#each coffes}}
+            <div class="column is-4">
+              <div class="card large">
+                <div class="card-image">
+                  <figure class="image is-1by1"><img src={{this.imgURL}} alt="Image">
+                  </figure>
+                </div>
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title is-4 no-padding">{{this.title}}</p>
+                    </div>
+                  </div>
+                  <div class="content">
+                    {{this.desctription}} руб.
+                    <div class="background-icon"><span class="icon-twitter"></span></div>
+                  </div>
+                  <div class="media-left">
+                  </div>
+                </div>
+                {{#if ../admin}}
+                <a href="/coffee/edit/{{this._id}}">Редактировать</a>
+                <a href="/coffee/delete/{{this._id}}" data-deletecoffee="deletecoffee">Удалить</a>
+                {{/if}}
+              </div>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

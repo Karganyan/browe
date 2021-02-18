@@ -1,0 +1,73 @@
+<div id="signinform">
+  <h1 class="sign">Форма регистрации</h1>
+
+  <form action="/auth/signup" method="POST" name="signupForm">
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <input name="name" class="input is-success" type="text" placeholder="Введите имя" required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-check"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <input name="login" class="input is-success" type="text" placeholder="Введите логин" required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-check"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <input name="phoneNumber" class="input is-success" type="tel" placeholder="(___) ___ __ __" required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-check"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <input name="email" class="input is-success" type="email" placeholder="Введите почту" required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <input name="password" class="input is-success" type="password" placeholder="Введите пароль" required>
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+    </div>
+
+    <div id="regformbtn" class="field is-grouped">
+      <div class="control">
+        <button id="btnreg" class="button is-link">Зарегистрироваться</button>
+      </div>
+      <a class="is-rounded" href="/auth/google"><img class="google-button"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/588px-Google_%22G%22_Logo.svg.png"></a>
+    </div>
+  </form>
+</div>

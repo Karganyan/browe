@@ -1,8 +1,265 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  color: rgb(224, 213, 213) !important;
 }
 
-a {
-  color: #00B7FF;
+body {
+  min-height: 100vh;
+  flex-direction: column;
+  display: flex;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo {
+  display: table;
+  text-align: center;
+}
+.logo-text {
+  background-size: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* НЕОН */
+@font-face {
+  font-family: 'Neon80sRegular';
+  src: url('http://thenewcode.com/assets/fonts/neon-webfont.woff') format('woff'),
+    url('http://thenewcode.com/assets/fonts/neon-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+h1#neon-tubing {
+  text-align: center;
+  font-family: Neon80sRegular, sans-serif;
+  font-size: 50px;
+  letter-spacing: 1rem;
+  background-size: cover;
+}
+@keyframes neonspark {
+  0% {
+    color: #e0d5d5;
+    text-shadow: none;
+  }
+  30% {
+    text-shadow: 0 0 30px rgb(255, 0, 0);
+    color: red;
+  }
+  60% {
+    color: red;
+    text-shadow: 0 0 30px rgb(255, 0, 0), 0 0 60px rgb(255, 0, 0);
+  }
+  80% {
+    color: #e0d5d5;
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: 0 0 60px rgb(255, 0, 0), 0 0 60px rgb(255, 0, 0), 0 0 800px rgb(255, 0, 0),
+      0 0 90px rgb(255, 0, 0);
+  }
+}
+h1#neon-tubing {
+  animation: neonspark 1s 3s forwards;
+}
+h1#neon-tubing span {
+  animation: neonspark 4s 3s infinite;
+}
+
+.navbar-item .navbar-link {
+  color: white !important;
+}
+/* ------------------------------------ */
+
+.sign {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.navbar-item {
+  padding: 5px 10px 5px 10px;
+  color: white !important;
+}
+
+.knopka {
+  font-size: 10px;
+}
+
+.img {
+  width: 30px;
+  height: 30px;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 50px !important;
+}
+
+.menu .card .card-image {
+  max-width: 300px;
+  max-height: 400px;
+}
+
+.navbar-item {
+  padding: 10px !important;
+}
+
+i img {
+  width: 60px;
+  border-radius: 13px;
+  margin-right: 20px;
+}
+
+.footer {
+  background-color: unset !important;
+  padding: 10px !important;
+  margin-top: auto;
+  background: rgba(0, 0, 0, 0.7) !important;
+  z-index: 3;
+}
+
+.columns.is-centered {
+  flex-wrap: wrap !important;
+}
+
+.column {
+  flex-basis: unset !important;
+}
+.navbar {
+  background-color: transparent !important;
+}
+
+body::after {
+  content: '';
+  /* background: url('https://picjumbo.com/wp-content/uploads/coffee-beans-with-place-for-text-2210x1473.jpg'); */
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://picjumbo.com/wp-content/uploads/coffee-beans-with-place-for-text-2210x1473.jpg');
+  opacity: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  background-size: 100%;
+  position: fixed;
+}
+
+a.navbar-item:hover {
+  background-color: unset !important;
+  text-decoration: underline;
+  color: red !important;
+}
+
+#navbar {
+  text-decoration: none !important;
+}
+
+#prev {
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.navbar-item {
+  font-size: 25px;
+}
+
+.title.is-4 {
+  padding: unset !important;
+  color: black !important;
+}
+
+strong {
+  color: white !important;
+}
+
+h2 {
+  color: white !important;
+}
+
+.content {
+  color: black !important;
+}
+
+footer p {
+  color: white !important;
+}
+
+.content p {
+  margin: 0 !important;
+}
+
+.subtitle p {
+  color: white !important;
+}
+
+.logo-text #minilogo {
+  color: white !important;
+}
+
+.subtitle.is-6 {
+  color: black !important;
+}
+
+.is-danger.is-outlined {
+  color: black !important;
+}
+
+input {
+  max-width: 300px !important;
+  color: black !important;
+}
+
+#signinform {
+  text-align: center !important;
+}
+
+#regformbtn {
+  justify-content: center !important;
+  margin-bottom: 10px;
+}
+.navbar-menu {
+  background-color: unset !important;
+}
+
+#google {
+  width: 100px !important;
+}
+
+.google-button {
+  height: 50px;
+  margin-left: 20px;
+}
+
+.profile-event-card {
+  margin: 20px;
+  width: 400px;
+}
+
+.tg-icon {
+  width: 50px;
+}
+
+.privateEvent {
+  text-align: center;
+  margin: 20px;
+}
+
+#editProfileForm {
+  text-align: center !important;
+}
+
+#name {
+  margin-right: 15px;
 }

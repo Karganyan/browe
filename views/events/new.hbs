@@ -1,0 +1,88 @@
+<h1 class="sign">Создание мероприятия</h1>
+
+<form action="/auth/signup" method="POST" name="signupForm">
+  <div class="field">
+    <label class="label">Название</label>
+    <div class="control has-icons-left has-icons-right">
+      <input name="title" class="input is-success" type="text" placeholder="Введите название мероприятия">
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Тема</label>
+    <div class="control has-icons-left has-icons-right">
+      <input name="theme" class="input is-success" type="text" placeholder="Введите тему мероприятия">
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Описание</label>
+    <div class="control has-icons-left has-icons-right">
+      <input name="desctription" class="input is-success" type="text" placeholder="Введите тему мероприятия">
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Дата</label>
+    <div class="control has-icons-left has-icons-right">
+      <input name="descriptionDate" class="input is-success" type="text" placeholder="Введите дату мероприятия"
+        required>
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Ссылка на фото</label>
+    <div class="control has-icons-left has-icons-right">
+      <input name="imgURL" class="input is-success" type="text" placeholder="Ссылка на фото" required>
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Ссылка на чат</label>
+    <div class="control has-icons-left has-icons-right">
+      <input name="urlChat" class="input is-success" type="text" placeholder="Ссылка на чат" required>
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link">Создать</button>
+    </div>
+  </div>
+</form>

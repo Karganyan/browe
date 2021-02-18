@@ -1,0 +1,52 @@
+<div class="section">
+  <div class="container ">
+    <section id="prev" class="section">
+      <div class="container">
+        <h2 class="title has-text-centered subtitle is-1">Личный кабинет</h2>
+      </div>
+    </section>
+
+    <div class="privateEvent">
+      <button class="button is-danger is-rounded" data-userid={{user.id}} data-editprofile="editprofile">Редактировать
+        профиль</button>
+    </div>
+    <div class="columns">
+      <div class="column is-12 ">
+        <h2 class="title"> </h2>
+
+        <div id="app" class="row columns is-multiline">
+          {{#each userEvents}}
+          <div class="column is-4">
+            <div class="card large">
+              <div class="card-image">
+                <figure class="image is-1by1"><img src={{this.imgURL}} alt="Image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4">{{this.title}}</p>
+                    <p class="title is-4">{{this.desctription}}</p>
+                    <p class="subtitle is-6">{{this.descriptionDate}}</p>
+                    <a href="{{this.urlChat}}"><img src="/Telegram-icon.png" alt="telegram-icon" class="tg-icon"></a>
+                  </div>
+                </div>
+                <div class="media-left">
+                  <button class="btnforevent button is-danger is-outlined" data-eventid={{this._id}} {{#if ../user.id}}
+                    data-userid={{../user.id }} {{else}} data-userid="" {{/if}}
+                    data-userevents={{../user.events}}>Записаться на
+                    мероприятие</button>
+                </div>
+              </div>
+              {{#if ../admin}}
+              <a href="/events/edit/{{this._id}}">Редактировать</a>
+              <a href="/events/delete/{{this._id}}" data-deletecoffee="deletecoffee">Удалить</a>
+              {{/if}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
