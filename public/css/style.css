@@ -1,14 +1,13 @@
 * {
   margin: 0;
   padding: 0;
-  color: rgb(224, 213, 213) !important
+  color: rgb(224, 213, 213) !important;
 }
 
 body {
   min-height: 100vh;
   flex-direction: column;
   display: flex;
-
 }
 
 .logo {
@@ -30,66 +29,57 @@ body {
 
 /* НЕОН */
 @font-face {
-	font-family: 'Neon80sRegular';
-	src: url('http://thenewcode.com/assets/fonts/neon-webfont.woff') format('woff'),
-         url('http://thenewcode.com/assets/fonts/neon-webfont.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Neon80sRegular';
+  src: url('http://thenewcode.com/assets/fonts/neon-webfont.woff') format('woff'),
+    url('http://thenewcode.com/assets/fonts/neon-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 h1#neon-tubing {
-	text-align: center;
-	font-family: Neon80sRegular, sans-serif;
-	font-size: 50px;
-	letter-spacing: 1rem;
-	background-size: cover;
-  
-
+  text-align: center;
+  font-family: Neon80sRegular, sans-serif;
+  font-size: 50px;
+  letter-spacing: 1rem;
+  background-size: cover;
 }
-@keyframes neonspark  {
-	0% {
+@keyframes neonspark {
+  0% {
     color: #e0d5d5;
-		text-shadow: none;
-	}
-	30% {
+    text-shadow: none;
+  }
+  30% {
     text-shadow: 0 0 30px rgb(255, 0, 0);
     color: red;
   }
-	60% {
+  60% {
     color: red;
-		text-shadow: 0 0 30px rgb(255, 0, 0),
-		  0 0 60px rgb(255, 0, 0);
-	}
-	80% {
+    text-shadow: 0 0 30px rgb(255, 0, 0), 0 0 60px rgb(255, 0, 0);
+  }
+  80% {
     color: #e0d5d5;
-		text-shadow: none;
-	}
-	100% {
-    
-		text-shadow: 0 0 60px rgb(255, 0, 0),
-		 0 0 60px rgb(255, 0, 0), 
-		 0 0 800px rgb(255, 0, 0), 
-     0 0 90px rgb(255, 0, 0);
-     
-	}
+    text-shadow: none;
+  }
+  100% {
+    text-shadow: 0 0 60px rgb(255, 0, 0), 0 0 60px rgb(255, 0, 0), 0 0 800px rgb(255, 0, 0),
+      0 0 90px rgb(255, 0, 0);
+  }
 }
 h1#neon-tubing {
   animation: neonspark 1s 3s forwards;
-  
-
-	}
+}
 h1#neon-tubing span {
   animation: neonspark 4s 3s infinite;
-  }
-  
-  .navbar-item .navbar-link {
-    color: white !important;
-  }
+}
+
+.navbar-item .navbar-link {
+  color: white !important;
+}
 /* ------------------------------------ */
 
-  .sign {
-    font-size: 60px;
-    margin-bottom: 10px;
-  }
+.sign {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
 
 .navbar-item {
   padding: 5px 10px 5px 10px;
@@ -112,16 +102,16 @@ h1#neon-tubing span {
 }
 
 h1 {
-  font-size: 50px !important
+  font-size: 50px !important;
 }
 
-.menu .card  .card-image {
+.menu .card .card-image {
   max-width: 300px;
   max-height: 400px;
 }
 
 .navbar-item {
-padding: 10px !important;
+  padding: 10px !important;
 }
 
 i img {
@@ -134,9 +124,8 @@ i img {
   background-color: unset !important;
   padding: 10px !important;
   margin-top: auto;
-  background: rgba(0,0,0,.7) !important; 
+  background: rgba(0, 0, 0, 0.7) !important;
   z-index: 3;
-
 }
 
 .columns.is-centered {
@@ -144,18 +133,17 @@ i img {
 }
 
 .column {
-  flex-basis: unset !important
+  flex-basis: unset !important;
 }
 .navbar {
   background-color: transparent !important;
 }
 
 body::after {
-  content: "";
+  content: '';
   /* background: url('https://picjumbo.com/wp-content/uploads/coffee-beans-with-place-for-text-2210x1473.jpg'); */
-  background-image:
-  linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-  url('https://picjumbo.com/wp-content/uploads/coffee-beans-with-place-for-text-2210x1473.jpg');;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://picjumbo.com/wp-content/uploads/coffee-beans-with-place-for-text-2210x1473.jpg');
   opacity: 1;
   top: 0;
   left: 0;
@@ -168,9 +156,9 @@ body::after {
 }
 
 a.navbar-item:hover {
-  background-color:  unset !important;
+  background-color: unset !important;
   text-decoration: underline;
-  color: red !important
+  color: red !important;
 }
 
 #navbar {
@@ -179,7 +167,7 @@ a.navbar-item:hover {
 
 #prev {
   border-radius: 30px;
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 3;
 }
 
@@ -189,7 +177,7 @@ a.navbar-item:hover {
 
 .title.is-4 {
   padding: unset !important;
-  color: black !important
+  color: black !important;
 }
 
 strong {
@@ -204,22 +192,21 @@ h2 {
   color: black !important;
 }
 
-
- footer p {
+footer p {
   color: white !important;
- }
+}
 
- .content p {
+.content p {
   margin: 0 !important;
- }
+}
 
- .subtitle p {
+.subtitle p {
   color: white !important;
- }
+}
 
- .logo-text #minilogo {
+.logo-text #minilogo {
   color: white !important;
- }
+}
 
 .subtitle.is-6 {
   color: black !important;
@@ -241,9 +228,16 @@ input {
 #regformbtn {
   justify-content: center !important;
   margin-bottom: 10px;
-
 }
 .navbar-menu {
   background-color: unset !important;
 }
 
+#google {
+  width: 100px !important;
+}
+
+.google-button {
+  height: 50px;
+  margin-left: 20px;
+}
