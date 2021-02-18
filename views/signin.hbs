@@ -1,35 +1,33 @@
 <div id="signinform">
-<h1 class="sign">Форма входа</h1>
+  <h1 class="sign">Форма входа</h1>
 
-<form action="/auth/signin" method="POST" name="signinForm">
-  <div class="field">
-    <p class="control has-icons-left has-icons-right">
-      <input name="login" class="input" type="text" placeholder="Введите логин">
-      <span class="icon is-small is-left">
-        <i class="fas fa-envelope"></i>
-      </span>
-      <span class="icon is-small is-right">
-        <i class="fas fa-check"></i>
-      </span>
-    </p>
-  </div>
-  <div class="field">
-    <p class="control has-icons-left">
-      <input name="password" class="input" type="password" placeholder="Введите пароль">
-      <span class="icon is-small is-left">
-        <i class="fas fa-lock"></i>
-      </span>
-    </p>
-  </div>
-  <div id="regformbtn" class="field is-grouped">
-    <div class="control">
-      <button id="btnreg" class="button is-link">Войти</button>
+  <form action="/auth/signin" method="POST" name="signinForm">
+    <div class="field">
+      <p class="control has-icons-left has-icons-right">
+        <input name="login" class="input" type="text" placeholder="Введите логин">
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+        <span class="icon is-small is-right">
+          <i class="fas fa-check"></i>
+        </span>
+      </p>
     </div>
-  </div>
-</form>
-
- <img id="google" style="padding-top: 15px;"><a class="is-rounded " href="/auth/google"><img
-      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/588px-Google_%22G%22_Logo.svg.png"></a>
-</img>
+    <div class="field">
+      <p class="control has-icons-left">
+        <input name="password" class="input" type="password" placeholder="Введите пароль">
+        <span class="icon is-small is-left">
+          <i class="fas fa-lock"></i>
+        </span>
+      </p>
+    </div>
+    <div id="regformbtn" class="field is-grouped">
+      <div class="control">
+        <button id="btnreg" class="button is-link">Войти</button>
+      </div>
+        <a class="is-rounded" href="/auth/google"><img class="google-button"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/588px-Google_%22G%22_Logo.svg.png"></a>
+    </div>
+  </form>
 
 </div>

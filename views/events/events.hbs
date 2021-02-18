@@ -18,7 +18,7 @@
           <div class="column is-4">
             <div class="card large">
               <div class="card-image">
-                <figure class="image is-1by1"><a href={{this.imgURL}}><img src={{this.imgURL}} alt="Image"></a>
+                <figure class="image is-1by1"><img src={{this.imgURL}} alt="Image">
                 </figure>
               </div>
               <div class="card-content">
@@ -32,8 +32,8 @@
                   <div class="background-icon"><span class="icon-twitter"></span></div>
                 </div>
                 <div class="media-left">
-                  <button class="btnforevent button is-danger is-outlined" data-eventid={{this._id}}  data-userid={{../user.id}} data-userevents={{../user.events}}
-                    >Записаться на
+                  <button class="btnforevent button is-danger is-outlined" data-eventid={{this._id}}
+                    data-userevents={{../user.events}} data-userid={{../user.id }}>Записаться на
                     мероприятие</button>
                 </div>
               </div>

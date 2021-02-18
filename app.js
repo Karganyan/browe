@@ -37,10 +37,12 @@ const { truncate } = require('fs');
 
 const app = express();
 
-app.use(cookieSession({
-  name: 'tim-session',
-  keys: ['key1', 'key2'],
-}));
+app.use(
+  cookieSession({
+    name: 'tim-session',
+    keys: ['key1', 'key2'],
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -54,20 +56,24 @@ app.set('trust proxy', 1);
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: false,
-}));
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: false,
-  cookie: {
-    secure: false,
-  },
-}));
+app.use(
+  session({
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+    },
+  })
+);
 app.use(userMiddleware);
 
 app.use(bodyParser.urlencoded({ extended: false }));
